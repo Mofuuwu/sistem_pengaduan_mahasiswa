@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,10 +27,6 @@ Route::get('/detail-aduan', function () {
     return view('home.complaint-detail');
 });
 
-Route::get('/login', function () {
-    return view('home.auth.login');
-});
-
-Route::get('/register', function () {
-    return view('home.auth.register');
-});
+Route::get('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout']);
