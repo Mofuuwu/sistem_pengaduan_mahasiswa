@@ -1,6 +1,9 @@
 @extends('layouts/start_html')
 @include('layouts/components/navbar')
 
+@if (!auth()->check())
+    @include('layouts/components/need-login')
+@else
 <section class="my-top-aduan flex flex-col items-center justify-center pb-12 px-[5%] md:px-[10%] lg:px-[10%]">
     <form id="aduan-form" class="gap-4 mt-8 bg-customgray w-full rounded-[16px] shadow-md p-[5%]">
         <h1 class="text-3xl font-bold font-inter text-blue-500 text-center mb-8">Form Aduan</h1>
@@ -84,6 +87,8 @@
         </div>
     </form>
 </section>
+@include('/layouts/components/footer')
+@endif
 
 @extends('layouts/end_html')
 

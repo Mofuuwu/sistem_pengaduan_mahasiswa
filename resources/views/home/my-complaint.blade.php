@@ -1,6 +1,9 @@
 @extends('layouts/start_html')
 @include('layouts/components/navbar')
 
+@if (!auth()->check())
+    @include('layouts/components/need-login')
+@else
 <section class="top-content w-full mt-20 relative flex flex-col justify-center items-center">
     <!-- Tombol Filter -->
     <div class="w-full flex justify-center gap-2">
@@ -162,6 +165,8 @@
 </section>
 
 @include('/layouts/components/footer')
+@endif
+
 @extends('layouts/end_html')
 <script>
     function toggleFilter() {

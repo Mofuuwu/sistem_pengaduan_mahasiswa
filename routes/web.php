@@ -19,14 +19,19 @@ Route::get('/jelajahi-aduan', function () {
     return view('home.search-complaint');
 });
 
-Route::get('/profile', function () {
-    return view('home.profile');
-});
-
 Route::get('/detail-aduan', function () {
     return view('home.complaint-detail');
 });
 
-Route::get('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'login']);
+
+//--------- AUTH --------------------
+
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'doRegister']);
+
+Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::post('/login', [AuthController::class, 'doLogin']);
+
 Route::get('/logout', [AuthController::class, 'logout']);
+
+Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth');

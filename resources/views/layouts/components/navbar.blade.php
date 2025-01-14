@@ -16,7 +16,7 @@
         </div>
 
         <a class="logo w-[30px] h-[30px] overflow-hidden rounded-full" href="{{ auth()->check() ? 'profile' : 'login' }}">
-            <img class="w-full h-full object-cover" src="https://static.vecteezy.com/system/resources/thumbnails/005/544/770/small/profile-icon-design-free-vector.jpg" alt="Logo">
+            <img class="w-full h-full object-cover" src="https://cdn-icons-png.flaticon.com/512/9815/9815472.png" alt="Logo">
         </a>
     </nav>
 

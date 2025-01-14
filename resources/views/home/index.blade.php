@@ -1,4 +1,13 @@
 @extends('layouts/start_html')
+
+@if (session('success'))
+    <div class="w-full flex justify-center items-center my-4">
+        <div class="bg-green-500 px-5 py-2 rounded-md w-1/2 text-white font-inter font-bold flex justify-center items-center">
+            {{ session('success') }}
+        </div>
+    </div>
+@endif
+
 <section class="my-top">
     <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Pengaduan Mahasiswa</h1>
     <div class="flex justify-center items-center">
@@ -206,7 +215,7 @@
     </div>
 
     <div class="w-full flex justify-center items-center mb-20">
-        <p class="bg-customblue text-white rounded-[16px] text-inter font-bold px-5 py-3 w-fit">Buat Pengaduan Sekarang</p>
+        <button class="bg-customblue text-white rounded-[16px] text-inter font-bold px-5 py-3 w-fit">Buat Pengaduan Sekarang</button>
     </div>
 </section>
 
