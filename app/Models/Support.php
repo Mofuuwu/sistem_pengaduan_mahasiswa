@@ -9,4 +9,11 @@ class Support extends Model
 {
     /** @use HasFactory<\Database\Factories\SupportFactory> */
     use HasFactory;
+    protected $guarded = [];
+    public function complaint() {
+        return $this->belongsTo(Complaint::class, 'complaint_id');
+    }
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

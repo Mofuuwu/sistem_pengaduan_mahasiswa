@@ -9,4 +9,8 @@ class Logs extends Model
 {
     /** @use HasFactory<\Database\Factories\LogsFactory> */
     use HasFactory;
+    protected $guarded = [];
+    public function complaint() {
+        return $this->belongsTo(Complaint::class, 'complaint_id');
+    }
 }

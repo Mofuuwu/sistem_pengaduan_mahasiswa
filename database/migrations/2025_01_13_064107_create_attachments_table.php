@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('complaint_id');
             $table->text('path_file');
-            $table->text('file_type');
+            $table->string('file_type');
             $table->timestamps();
         });
     }
