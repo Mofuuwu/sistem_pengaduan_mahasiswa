@@ -85,6 +85,23 @@ class AuthController extends Controller
 
     public function profile() {
         $profile = Auth::user();
-        return view('home.profile', ['profile' => $profile]);
+        $college_profile = CollegeStudent::where('user_id', $profile->id)->first();
+        return view('home.profile', ['profile' => $profile, 'copr' => $college_profile]);
+    }
+
+    public function editProfile(Request $request) {
+        $user = User::find(Auth::user()->id);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'min:8|string|nullable',
+        ]);
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        if(!empty($validatedData['password'])) {
+            $user->password = bcrypt($validatedData['password']);
+        };
+        $user->save();
+        return redirect('/profile')->with('success', 'Profil Anda Berhasil Diperbarui');
     }
 }

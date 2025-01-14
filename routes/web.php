@@ -35,3 +35,4 @@ Route::post('/login', [AuthController::class, 'doLogin']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth');
+Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('auth');
