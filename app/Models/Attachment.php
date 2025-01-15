@@ -11,6 +11,6 @@ class Attachment extends Model
     use HasFactory;
     protected $guarded = [];
     public function complaint() {
-        return $this->belongsTo(Complaint::class, 'complaint_id');
+        return $this->belongsTo(Complaint::class, 'complaint_id', 'id');
     }
 }

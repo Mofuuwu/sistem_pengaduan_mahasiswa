@@ -20,7 +20,7 @@ class Complaint extends Model
         return $this->hasMany(Support::class, 'complaint_id');
     }
     public function attachments() {
-        return $this->hasMany(Attachment::class, 'complaint_id');
+        return $this->hasMany(Attachment::class, 'complaint_id', 'id');
     }
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');

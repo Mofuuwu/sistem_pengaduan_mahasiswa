@@ -42,3 +42,4 @@ Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('aut
 //Seputar Aduan
 Route::post('/buat-aduan', [ComplaintController::class, 'handle_complaint']);
 Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint']);
+Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);

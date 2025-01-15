@@ -10,20 +10,20 @@
         <div class="border-gray-300 bg-customgray md:w-[70%] w-full">
             <div class="flex justify-between items-center px-5 py-3">
                 <div class="">
-                    <p class="text-customblue font-bold font-inter">Rincian Aduan : JDUSHUSIAJ</p>
+                    <p class="text-customblue font-bold font-inter">Rincian Aduan : {{$complaint->id}}</p>
                 </div>
-                <p class="bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">Verifikasi</p>
+                <p class="bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{ $complaint->logs()->latest()->first()->name ?? 'belum ada logs' }}</p>
             </div>
             <hr class="border-[1px] border-customgray2">
             <div class="flex-2 p-5">
                 <div class="grid grid-cols-3 gap-4 mb-5">
-                    <img src="https://cdn1-production-images-kly.akamaized.net/J_qaSn7xpC5d-kbHx-wCsOiFsuY=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4770934/original/018943800_1710311605-mountains-8451480_1280.jpg" alt="Image 1" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
-                    <img src="https://cdn1-production-images-kly.akamaized.net/J_qaSn7xpC5d-kbHx-wCsOiFsuY=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4770934/original/018943800_1710311605-mountains-8451480_1280.jpg" alt="Image 2" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
-                    <img src="https://cdn1-production-images-kly.akamaized.net/J_qaSn7xpC5d-kbHx-wCsOiFsuY=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4770934/original/018943800_1710311605-mountains-8451480_1280.jpg" alt="Image 3" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
+                    @foreach($complaint->attachments as $attachment)
+                        <img src="{{$attachment->path_file}}" alt="Image" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
+                    @endforeach
                 </div>
                 <div class="bg-customgray2 p-4 rounded-lg shadow">
-                    <p class="text-customblue opacity-70 font-inter font-medium">Toilet - 1 Januari 2025</p>
-                    <p class="font-inter text-customblue">Assalamu'alaikum wr. wb. saya ingin melaporkan didaerah saya tepatnya didesa ketro lorejo kelurahan ketro kec. karang rayung kab. grobogan jawa tengah ada beberapa rumah warga yang terancam longsor, saya mohon kepada bapak gubernur untuk bantuan dan penanggulangannya.</p>
+                    <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{$complaint->created_at}}</p>
+                    <p class="font-inter text-customblue">{{$complaint->description}}</p>
                 </div>
             </div>
             <hr class="border-[1px] border-customgray2">
@@ -34,7 +34,7 @@
                 </button>
                 <button class="flex justify-center items-center gap-1 bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">
                     <ion-icon class="text-sm" name="bookmark"></ion-icon>
-                    <p>Didukung Oleh 102 Orang</p>
+                    <p>{{$complaint->supports->count()}} Orang Mendukung</p>
                 </button>
             </div>
         </div>
@@ -44,11 +44,13 @@
             <div class="mb-5">
                 <h3 class="text-lg font-semibold mb-3 text-customblue">Progress Aduan</h3>
                 <div class="text-sm flex flex-col gap-2">
+                @foreach($complaint->logs as $log)
                     <div class="flex flex-col justify-between border-b p-2 bg-purple-500 rounded-lg">
-                        <span class="text-white font-bold">Sebelum Verifikasi</span>
+                        <span class="text-white font-bold">{{ $log->name }}</span>
                         <span class="text-white opacity-90">10 Jan 2025</span>
                     </div>
-                    <div class="flex flex-col justify-between border-b p-2 bg-green-500 rounded-lg">
+                @endforeach
+                    <!-- <div class="flex flex-col justify-between border-b p-2 bg-green-500 rounded-lg">
                         <span class="text-white font-bold">Verifikasi</span>
                         <span class="text-white opacity-90">10 Jan 2025</span>
                     </div>
@@ -58,7 +60,7 @@
                             onclick="showImageModal(this)">
                         <span class="text-white font-bold">Selesai</span>
                         <span class="text-white opacity-90">10 Jan 2025</span>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
