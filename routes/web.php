@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComplaintController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('home.index');
@@ -15,12 +17,12 @@ Route::get('/aduanku', function () {
     return view('home.my-complaint');
 });
 
-Route::get('/jelajahi-aduan', function () {
-    return view('home.search-complaint');
-});
-
 Route::get('/detail-aduan', function () {
     return view('home.complaint-detail');
+});
+
+Route::get('/aduan-berhasil', function () {
+    return view('home.complaint-success');
 });
 
 
@@ -36,3 +38,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth');
 Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('auth');
+
+//Seputar Aduan
+Route::post('/buat-aduan', [ComplaintController::class, 'handle_complaint']);
+Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint']);

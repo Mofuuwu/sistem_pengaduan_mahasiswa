@@ -78,8 +78,9 @@
     </form>
 </section>
 
-<section id="my-complaint-modal" class="flex w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20 mt-8">
+<section id="" class="flex w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20 mt-8">
     <div class="container-card flex flex-col gap-4">
+        @foreach ($complaints as $complaint)
         <a href="#" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
             <div class="img w-full h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
                 <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/ea/7a/30/ea7a300c2990158aea798402e5739c81.jpg" alt="gambar">
@@ -87,17 +88,19 @@
             <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
                 <div class="flex flex-col">
                     <div class="flex justify-between md:gap-0 gap-2">
-                        <p class="font-inter font-bold text-customblue md:text-lg">XAGSHAJSKAHSKS</p>
+                        <p class="font-inter font-bold text-customblue md:text-lg">Kode Unik</p>
                         <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">50 Orang Mendukung</p>
                     </div>
-                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">Toilet - 1 Januari 2025</p>
+                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">{{$complaint['location_id']}} - {{$complaint['created_at']}}</p>
                 </div>
-                <p class="font-inter font-medium text-customblue opacity-70">bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di.....</p>
+                <p class="font-inter font-medium text-customblue opacity-70">{{$complaint['description']}}</p>
                 <div class="flex justify-between items-center">
                     <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">Verifikasi</p>
                 </div>
             </div>
         </a>
+        @endforeach
+        
         <a href="#" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
             <div class="img w-full h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
                 <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/ea/7a/30/ea7a300c2990158aea798402e5739c81.jpg" alt="gambar">

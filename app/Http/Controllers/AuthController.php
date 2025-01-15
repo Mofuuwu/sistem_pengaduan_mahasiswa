@@ -95,6 +95,9 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'min:8|string|nullable',
+        ],[
+            'email.unique' => 'Email sudah terdaftar, silakan gunakan email lain.',
+            'password.min' => 'Password harus memiliki minimal 8 karakter.',
         ]);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
