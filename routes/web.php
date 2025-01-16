@@ -45,4 +45,6 @@ Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);
 Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);
 
 Route::post('jelajahi-aduan/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
+Route::post('aduanku/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
+Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');

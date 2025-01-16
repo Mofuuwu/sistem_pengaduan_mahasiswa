@@ -48,9 +48,15 @@
             <hr class="border-[1px] border-customgray2">
             <div class="flex-2 p-5">
                 <div class="grid grid-cols-3 gap-4 mb-5">
-                    @foreach($complaint->attachments as $attachment)
-                    <img src="{{$attachment->path_file}}" alt="Image" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
-                    @endforeach
+                @foreach ($complaint->attachments as $attachment)
+                    @if ($attachment->file_type == 'pdf')
+                        <div class="w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
+                            <embed src="{{ $attachment->path_file }}" type="application/pdf" class="w-full h-full" />
+                        </div>
+                    @else
+                        <img src="{{ $attachment->path_file }}" alt="Image" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
+                    @endif
+                @endforeach
                 </div>
                 <div class="bg-customgray2 p-4 rounded-lg shadow">
                     <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{$complaint->created_at}}</p>

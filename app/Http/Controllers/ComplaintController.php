@@ -60,10 +60,14 @@ class ComplaintController extends Controller
     {
         if (Auth::check()) {
             $complaints = Complaint::where('user_id', Auth::user()->id)->paginate(2);
+            $supported_complaints = Complaint::whereHas('supports', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })->paginate(2);
         } else {
             $complaints = null;
+            $supported_complaints = null;
         }
-        return view('home.my-complaint', ['complaints' => $complaints]);
+        return view('home.my-complaint', ['complaints' => $complaints, 'supported_complaints' => $supported_complaints]);
     }
 
     public function handle_complaint(Request $request)
