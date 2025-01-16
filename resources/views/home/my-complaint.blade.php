@@ -83,44 +83,69 @@
 </section>
 
 <section id="my-complaint-modal" class="hidden w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20">
-    <h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan 2 dari 5 Aduan</h2>
+@if ($complaints->isNotEmpty())
+    <h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan {{ $complaints->count() }} dari {{ $complaints->total() }} Aduan</h2>
     <div class="container-card flex flex-col gap-4">
-        <a href="/detail-aduan" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
-            <div class="img w-full h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
-                <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/ea/7a/30/ea7a300c2990158aea798402e5739c81.jpg" alt="gambar">
+        @foreach ($complaints as $complaint)
+        <a href="aduanku/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
+            <div class="img w-full max-h-[200px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
+            @php
+                $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong
+            @endphp
+
+            @if($firstAttachment)
+                <img class="object-cover w-full h-full bg-red-500" 
+                    src="{{$firstAttachment->file_type == 'pdf' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXHQMBA2g77jAGv-GHfYOMYae4yuAwYcsAzg&s' : $firstAttachment->path_file}}" 
+                    alt="gambar">
+            @else
+                <p>No attachments available</p>
+            @endif
             </div>
             <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
                 <div class="flex flex-col">
                     <div class="flex justify-between md:gap-0 gap-2">
-                        <p class="font-inter font-bold text-customblue md:text-lg">XAGSHAJSKAHSKS</p>
-                        <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">50 Orang Mendukung</p>
+                        <p class="font-inter font-bold text-customblue md:text-lg">{{$complaint->id}}</p>
+                        <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">{{$complaint->supports->count()}} Dukungan</p>
                     </div>
-                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">Toilet - 1 Januari 2025</p>
+                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">{{$complaint->location_id}} - {{$complaint->created_at}}</p>
                 </div>
-                <p class="font-inter font-medium text-customblue opacity-70">bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di.....</p>
+                <p class="font-inter font-medium text-customblue opacity-70">{{ \Str::limit($complaint->description, 100)}}</p>
                 <div class="flex justify-between items-center">
-                    <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">Verifikasi</p>
-                </div>
-            </div>
-        </a> <a href="#" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
-            <div class="img w-full h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
-                <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/ea/7a/30/ea7a300c2990158aea798402e5739c81.jpg" alt="gambar">
-            </div>
-            <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
-                <div class="flex flex-col">
-                    <div class="flex justify-between md:gap-0 gap-2">
-                        <p class="font-inter font-bold text-customblue md:text-lg">XAGSHAJSKAHSKS</p>
-                        <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">50 Orang Mendukung</p>
-                    </div>
-                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">Toilet - 1 Januari 2025</p>
-                </div>
-                <p class="font-inter font-medium text-customblue opacity-70">bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di.....</p>
-                <div class="flex justify-between items-center">
-                    <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">Verifikasi</p>
+                    <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">  {{ $complaint->logs()->latest()->first()->name ?? 'belum ada logs' }}</p>
                 </div>
             </div>
         </a>
+        @endforeach
+
+        <div class="flex justify-center mt-4 items-center w-full">
+            <!-- Custom Styling Pagination -->
+            {{ $complaints->links('vendor.pagination.custom-pagination') }}
+        </div>
+
+
+
+        <!-- <a href="#" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
+            <div class="img w-full h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
+                <img class="object-cover w-full h-full" src="https://i.pinimg.com/736x/ea/7a/30/ea7a300c2990158aea798402e5739c81.jpg" alt="gambar">
+            </div>
+            <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
+                <div class="flex flex-col">
+                    <div class="flex justify-between md:gap-0 gap-2">
+                        <p class="font-inter font-bold text-customblue md:text-lg">XAGSHAJSKAHSKS</p>
+                        <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">50 Orang Mendukung</p>
+                    </div>
+                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">Toilet - 1 Januari 2025</p>
+                </div>
+                <p class="font-inter font-medium text-customblue opacity-70">bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di bolak balik bolak balik Jepara pak, Jepara pak bupati, yg terhormat bapak Bupati, saluran air di.....</p>
+                <div class="flex justify-between items-center">
+                    <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">Verifikasi</p>
+                </div>
+            </div>
+        </a> -->
     </div>
+    @else
+    @include('/layouts/components/empty-complaint')
+    @endif
 </section>
 
 <section id="supported-complaint-modal" class="hidden w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20">
@@ -163,6 +188,7 @@
         </a>
     </div>
 </section>
+
 
 @include('/layouts/components/footer')
 @endif

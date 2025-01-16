@@ -13,10 +13,6 @@ Route::get('/buat-aduan', function () {
     return view('home.make-complaint');
 });
 
-Route::get('/aduanku', function () {
-    return view('home.my-complaint');
-});
-
 Route::get('/detail-aduan', function () {
     return view('home.complaint-detail');
 });
@@ -41,5 +37,9 @@ Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('aut
 
 //Seputar Aduan
 Route::post('/buat-aduan', [ComplaintController::class, 'handle_complaint']);
+
 Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint']);
 Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);
+
+Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);
+Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);

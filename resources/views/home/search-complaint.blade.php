@@ -77,18 +77,19 @@
         </div>
     </form>
 </section>
-
+@if ($complaints->isNotEmpty())
+<h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan {{ $complaints->count() }} dari {{ $complaints->total() }} Aduan</h2>
 <section id="" class="flex w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20 mt-8">
     <div class="container-card flex flex-col gap-4 w-full">
         @foreach ($complaints as $complaint)
         <a href="jelajahi-aduan/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
-            <div class="img w-full max-h-[150px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
+            <div class="img w-full max-h-[200px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
             @php
                 $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong
             @endphp
 
             @if($firstAttachment)
-                <img class="object-cover w-full h-full" 
+                <img class="object-cover w-full h-full bg-red-500" 
                     src="{{$firstAttachment->file_type == 'pdf' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXHQMBA2g77jAGv-GHfYOMYae4yuAwYcsAzg&s' : $firstAttachment->path_file}}" 
                     alt="gambar">
             @else
@@ -103,7 +104,7 @@
                     </div>
                     <p class="font-inter font-medium text-[14px] text-customblue opacity-70">{{$complaint->location_id}} - {{$complaint->created_at}}</p>
                 </div>
-                <p class="font-inter font-medium text-customblue opacity-70">{{$complaint->description}}</p>
+                <p class="font-inter font-medium text-customblue opacity-70">{{ \Str::limit($complaint->description, 100)}}</p>
                 <div class="flex justify-between items-center">
                     <p class="font-inter font-bold text-white bg-green-500 py-1 px-3 rounded-sm text-md">  {{ $complaint->logs()->latest()->first()->name ?? 'belum ada logs' }}</p>
                 </div>
@@ -167,6 +168,13 @@
         </a> -->
     </div>
 </section>
+        <div class="flex justify-center mt-4 items-center w-full mb-20">
+            <!-- Custom Styling Pagination -->
+            {{ $complaints->links('vendor.pagination.custom-pagination') }}
+        </div>
+@else 
+@include('/layouts/components/empty-complaint')
+@endif
 
 @include('/layouts/components/footer')
 @extends('layouts/end_html')

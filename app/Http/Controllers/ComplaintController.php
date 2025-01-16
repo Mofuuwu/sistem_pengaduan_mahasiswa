@@ -12,13 +12,21 @@ use Illuminate\Support\Str;  // Pastikan Str digunakan untuk generate nama unik
 class ComplaintController extends Controller
 {
     public function search_complaint() {
-        $complaints = Complaint::all();
+        $complaints = Complaint::orderBy('created_at', 'desc')->paginate(2);
         return view('home.search-complaint', ['complaints' => $complaints]);
     }
 
     public function detail($id) {
         $complaint = Complaint::findOrFail($id);
         return view('home.complaint-detail', ['complaint' => $complaint]);
+    }
+    public function my_complaint() {
+        if(Auth::check()) {
+            $complaints = Complaint::where('user_id', Auth::user()->id )->paginate(2);
+        } else {
+            $complaints = null;
+        }
+        return view('home.my-complaint', ['complaints' => $complaints]);
     }
 
     public function handle_complaint(Request $request)
