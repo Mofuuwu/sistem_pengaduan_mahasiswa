@@ -24,15 +24,15 @@ Route::get('/aduan-berhasil', function () {
 
 //--------- AUTH --------------------
 
-Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest')->name('register');
 Route::post('/register', [AuthController::class, 'doRegister']);
 
-Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::get('/login', [AuthController::class, 'login'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'doLogin']);
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth');
+Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth')->name('profile');
 Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('auth');
 
 //Seputar Aduan
@@ -43,3 +43,6 @@ Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);
 
 Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);
 Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);
+
+Route::post('jelajahi-aduan/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
+Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');

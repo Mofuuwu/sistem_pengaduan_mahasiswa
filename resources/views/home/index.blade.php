@@ -1,12 +1,13 @@
 @extends('layouts/start_html')
 
-@if (session('success'))
-    <div class="w-full flex justify-center items-center my-4">
-        <div class="bg-green-500 px-5 py-2 rounded-md w-1/2 text-white font-inter font-bold flex justify-center items-center">
-            {{ session('success') }}
+<div id="successMessage" class=" z-[1000] w-full flex justify-center items-center my-4">
+        <div class="bg-green-500 px-5 py-2 rounded-md text-white font-inter font-bold flex justify-between items-center">
+            <span>{{session('success')}}</span>
+            <button onclick="closeMessage()" class="ml-4 text-white text-lg font-bold">
+                &times; <!-- Simbol 'x' -->
+            </button>
         </div>
-    </div>
-@endif
+</div>
 
 <section class="my-top">
     <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Pengaduan Mahasiswa</h1>
@@ -265,6 +266,15 @@
         <p class="bg-customblue text-white rounded-[16px] text-inter font-bold px-5 py-3 w-fit text-sm sm:text-xs">Buat Pengaduan Sekarang</p>
     </div>
 </section>
+
+<script>
+    function closeMessage() {
+        const messageBox = document.getElementById('successMessage');
+        if (messageBox) {
+            messageBox.style.display = 'none';
+        }
+    }
+</script>
 
 @include('layouts/components/footer')
 

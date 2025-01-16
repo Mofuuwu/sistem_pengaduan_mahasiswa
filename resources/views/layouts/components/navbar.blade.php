@@ -15,7 +15,7 @@
             <a href="/jelajahi-aduan" class="{{ Request::is('jelajahi-aduan') ? 'text-green-400' : '' }}">Jelajahi Aduan</a>
         </div>
 
-        <a class="logo w-[30px] h-[30px] overflow-hidden rounded-full" href="{{ auth()->check() ? 'profile' : 'login' }}">
+        <a class="logo w-[30px] h-[30px] overflow-hidden rounded-full" href="{{ auth()->check() ? route('profile') : route('login') }}">
             <img class="w-full h-full object-cover" src="https://cdn-icons-png.flaticon.com/512/9815/9815472.png" alt="Logo">
         </a>
     </nav>
