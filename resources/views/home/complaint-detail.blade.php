@@ -3,7 +3,6 @@
 @include('layouts/components/navbar')
 
 @if (session('success'))
-
 <div id="successMessage" class=" z-[1000] w-full flex justify-center items-center my-4">
     <div class="bg-green-500 px-5 py-2 rounded-md text-white font-inter font-bold flex justify-between items-center">
         <span>{{session('success')}}</span>

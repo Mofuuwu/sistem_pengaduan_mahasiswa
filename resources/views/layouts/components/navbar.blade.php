@@ -11,7 +11,7 @@
         <div class="text-white text-bold gap-5 font-inter font-bold hidden md:flex">
             <a href="/" class="{{ Request::is('/') ? 'text-green-400' : '' }}">Beranda</a>
             <a href="/buat-aduan" class="{{ Request::is('buat-aduan') ? 'text-green-400' : '' }}">Buat Aduan</a>
-            <a href="/aduanku" class="{{ Request::is('aduanku') ? 'text-green-400' : '' }}">Aduanku</a>
+            <a href="/aduanku" class="{{ Request::is('aduanku') || Request::is('aduan-didukung') ? 'text-green-400' : '' }}">Aduanku</a>
             <a href="/jelajahi-aduan" class="{{ Request::is('jelajahi-aduan') ? 'text-green-400' : '' }}">Jelajahi Aduan</a>
         </div>
 

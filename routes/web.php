@@ -5,9 +5,6 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/buat-aduan', function () {
-    return view('home.make-complaint');
-});
 
 Route::get('/aduan-berhasil', function () {
     return view('home.complaint-success');
@@ -33,12 +30,16 @@ Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('aut
 
 //Seputar Aduan
 Route::post('/buat-aduan', [ComplaintController::class, 'handle_complaint']);
+Route::get('/buat-aduan', [ComplaintController::class, 'make_complaint']);
 
 Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint']);
 Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);
 
 Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);
+Route::get('/aduan-didukung', [ComplaintController::class, 'supported_complaint']);
+
 Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);
+Route::get('aduan-didukung/{id}', [ComplaintController::class, 'detail']);
 
 Route::get('detail/{id}', [ComplaintController::class, 'detail']);
 
@@ -49,3 +50,5 @@ Route::post('detail/{complaint}/add-support', [ComplaintController::class, 'add_
 Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
+
+Route::post('search', [ComplaintController::class, 'search_function']);

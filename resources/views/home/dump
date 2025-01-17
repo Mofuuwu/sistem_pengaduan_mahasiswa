@@ -4,17 +4,20 @@ besok rabu 15/1/2025
 membuat database seeder dan membuat halaman 
 DONE => menjadi dinamis serta memulai membuat logika pada form pengaduan 
 
-membuat tampilan aduan sukses terkirim
 DONE => membuat logic tampilan untuk halaman web yg dinamis 
 DONE => membuat pagination
-membuat tampilan detail jika format yg dikirim adalah pdf
-membuat tampilan pada detail user yg memposting aduan
 DONE => membuat fitur untuk mendukung aduan orang lain dan diri sendiri
-error pada notif di index terutama ketika login tidak mau muncul
-fitur cari
+DONE => error pada notif di index terutama ketika login tidak mau muncul
+DONE => membuat tampilan aduan sukses terkirim
+
+membuat tampilan detail jika format yg dikirim adalah pdf
+melanjutkan fitur cari
+memperbaiki bug responsif di beranda/index
 
 opsional
+membuat tampilan pada detail user yg memposting aduan
 membuat logo branding
+fitur filter
 
 
 

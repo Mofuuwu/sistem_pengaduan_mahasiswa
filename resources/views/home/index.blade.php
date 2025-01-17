@@ -20,7 +20,7 @@
 @include('layouts/components/navbar')
 
 <section class="my-search bg-customgray bg-opacity-40 mt-20 px-4 sm:px-6 md:px-[10%] flex justify-center items-center flex-col">
-    <form class="form-input flex flex-col gap-4 w-full mt-24 my-20">
+    <form action="search" method="post" class="form-input flex flex-col gap-4 w-full mt-24 my-20">
         <!-- Teks di atas -->
         <p class="text-customblue font-inter font-bold mb-2 text-center sm:text-left">
             Sudah Pernah Melakukan Pengaduan? Cek Disini
@@ -29,18 +29,18 @@
         <!-- Input dan Button dalam satu baris -->
         <div class="flex flex-col sm:flex-row w-full gap-4">
             <!-- Input Field -->
-            <input type="text" placeholder="Contoh : JDHSJAKDNSKAN"
+            <input type="text" name="keyword" placeholder="Contoh : 20250116015433001 (Kode Unik 17 Digit)"
                 class="px-5 py-3 rounded-[12px] w-full sm:w-[75%] bg-customgray2 border-[3px] border-customblue border-opacity-50 font-inter font-bold text-customblue">
-
             <!-- Button -->
             <button type="submit"
                 class="text-white font-inter font-bold bg-customblue px-6 py-3 w-full sm:w-[24%] rounded-[12px] border-[3px] border-customblue">
                 Cari Aduan
             </button>
         </div>
+        <p class=" text-left font-inter font-bold text-red-500">*Aduan Tidak Ditemukan</p>
 
         <!-- Teks di bawah input dan button -->
-        <p class="text-customblue font-inter mt-4 text-center sm:text-left">
+        <p class="text-customblue font-inter mt-4 text-center sm:text-left flex justify-center">
             <span class="font-medium">Ingin melakukan pengaduan?</span>
             <a href="#" class="font-bold">Login Sekarang</a>
         </p>

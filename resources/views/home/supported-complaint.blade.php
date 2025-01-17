@@ -12,10 +12,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
         </button>
-        <a href="aduanku" id="btn-my-complaint" onclick="showMyComplaint()" class="transition-colors duration-300 ease-in-out bg-customblue text-white py-2 px-5 rounded-[12px] flex justify-center items-center">
+        <a href="aduanku" id="btn-my-complaint" onclick="showMyComplaint()" class="transition-colors duration-300 ease-in-out  py-2 px-5 rounded-[12px] flex justify-center items-center bg-customgray text-customblue">
             <p class="font-inter font-bold">Aduan Saya</p>
         </a>
-        <a href="aduan-didukung" id="btn-supported-complaint" onclick="showSupportedComplaint()" class="transition-colors duration-300 ease-in-out bg-customgray text-customblue py-2 px-5 rounded-[12px] flex justify-center items-center">
+        <a href="aduan-didukung" id="btn-supported-complaint" onclick="showSupportedComplaint()" class="transition-colors duration-300 ease-in-out bg-customblue text-white py-2 px-5 rounded-[12px] flex justify-center items-center">
             <p class="font-inter font-bold">Aduan Didukung</p>
         </a>
     </div>
@@ -82,15 +82,15 @@
     </form>
 </section>
 
-<section id="my-complaint-modal" class="flex flex-col w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20">
-@if ($complaints->isNotEmpty())
-    <h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan {{ $complaints->count() }} dari {{ $complaints->total() }} Aduan</h2>
+<section id="supported-complaint-modal" class="flex flex-col w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20">
+@if ($supported_complaints->isNotEmpty())
+    <h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan {{ $supported_complaints->count() }} dari {{ $supported_complaints->total() }} Aduan</h2>
     <div class="container-card flex flex-col gap-4">
-        @foreach ($complaints as $complaint)
-        <a href="aduanku/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
+        @foreach ($supported_complaints as $complaint)
+        <a href="aduan-didukung/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
             <div class="img w-full max-h-[200px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
             @php
-                $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong
+                $firstAttachment = $complaint->attachments->first(); 
             @endphp
 
             @if($firstAttachment)
@@ -119,16 +119,13 @@
 
         <div class="flex justify-center mt-4 items-center w-full">
             <!-- Custom Styling Pagination -->
-            {{ $complaints->links('vendor.pagination.custom-pagination') }}
+            {{ $supported_complaints->links('vendor.pagination.custom-pagination') }}
         </div>
-
-
     </div>
     @else
-    @include('/layouts/components/empty-complaint')
+        @include('/layouts/components/empty-complaint')
     @endif
 </section>
-
 
 
 @include('/layouts/components/footer')

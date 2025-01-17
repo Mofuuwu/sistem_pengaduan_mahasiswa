@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 use App\Models\Complaint;
 use App\Models\Logs;
+use App\Models\Rules;
 use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,17 +60,32 @@ class ComplaintController extends Controller
     public function my_complaint()
     {
         if (Auth::check()) {
-            $complaints = Complaint::where('user_id', Auth::user()->id)->paginate(2);
+            $complaints = Complaint::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(2);
+        } else {
+            $complaints = null;
+        }
+        return view('home.my-complaint', ['complaints' => $complaints]);
+    }
+    public function supported_complaint()
+    {
+        if (Auth::check()) {
             $supported_complaints = Complaint::whereHas('supports', function ($query) {
                 $query->where('user_id', Auth::user()->id);
             })->paginate(2);
         } else {
-            $complaints = null;
             $supported_complaints = null;
         }
-        return view('home.my-complaint', ['complaints' => $complaints, 'supported_complaints' => $supported_complaints]);
+        return view('home.supported-complaint', ['supported_complaints' => $supported_complaints]);
+    }
+    public function search_function()
+    {
+        
     }
 
+    public function make_complaint() {
+        $rules = Rules::all();
+        return view('home.make-complaint', ['rules' => $rules]);
+    }
     public function handle_complaint(Request $request)
     {
         $request->validate([
@@ -140,9 +156,6 @@ class ComplaintController extends Controller
         }
 
         // Mengembalikan response sukses
-        return response()->json([
-            'message' => 'Pengaduan berhasil disubmit!',
-            'complaint' => $complaint,
-        ]);
+        return redirect('/aduanku' . '/' . $complaint->id)->with('success', 'Aduan Telah Berhasil Dibuat');
     }
 }

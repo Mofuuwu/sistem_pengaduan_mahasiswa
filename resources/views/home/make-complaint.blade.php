@@ -99,8 +99,9 @@
         <div id="modal-2" class="modal-2 hidden">
             <div class="p-6">
                 <h2 class="text-2xl font-bold text-blue-500 mb-4">Kebijakan Pengaduan</h2>
-                <p class="text-gray-700">Berikut adalah kebijakan pengaduan yang harus Anda setujui sebelum melanjutkan.</p>
-                <p class="text-gray-700 mt-4">1. Pengaduan harus disertai bukti gambar atau dokumen pendukung.<br>2. Pengaduan tidak mengandung unsur SARA atau fitnah.</p>
+                @foreach ($rules as $rule)
+                    <p class="text-gray-700 mt-4">{{$loop->iteration}}. {{$rule->description}}</p>
+                @endforeach
                 <button type="submit" class="mt-6 w-full py-3 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                     Kirim Pengaduan
                 </button>
