@@ -72,6 +72,18 @@ class ComplaintController extends Controller
 
     public function handle_complaint(Request $request)
     {
+        $request->validate([
+            'description' => 'required|string',  
+            'location_id' => 'required',  
+            'category_id' => 'required',  
+            'attachments' => 'required', 
+        ], [
+            'description.required' => 'Deskripsi aduan harus diisi.',
+            'attachments.required' => 'Sertakan minimal 1 bukti foto atau menggunakan pdf', 
+            'location_id.required' => 'Lokasi aduan harus dipilih.',
+            'category_id.required' => 'Kategori aduan harus dipilih.',
+        ]);
+    
         $currentDate = now()->format('YmdHis'); // Format: YYYYMMDDHHMMSS
 
         // Mencari ID yang terakhir pada hari yang sama berdasarkan prefix (timestamp) yang sudah ada

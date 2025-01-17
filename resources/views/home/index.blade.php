@@ -1,5 +1,6 @@
 @extends('layouts/start_html')
-<div id="successMessage" class=" z-[1000] hidden w-full flex justify-center items-center my-4">
+@if(session('success'))
+<div id="successMessage" class=" z-[1000] w-full flex justify-center items-center my-4">
         <div class="bg-green-500 px-5 py-2 rounded-md text-white font-inter font-bold flex justify-between items-center">
             <span>{{session('success')}}</span>
             <button onclick="closeMessage()" class="ml-4 text-white text-lg font-bold">
@@ -7,6 +8,7 @@
             </button>
         </div>
 </div>
+@endif
 
 <section class="my-top">
     <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Pengaduan Mahasiswa</h1>
@@ -231,7 +233,7 @@
     </div>
 
     <div class="w-full flex justify-center items-center mb-20">
-        <button class="bg-customblue text-white rounded-[16px] text-inter font-bold px-5 py-3 w-fit">Buat Pengaduan Sekarang</button>
+        <a href="buat-aduan" class="bg-customblue text-white rounded-[16px] text-inter font-bold px-5 py-3 w-fit">Buat Pengaduan Sekarang</a>
     </div>
 </section>
 

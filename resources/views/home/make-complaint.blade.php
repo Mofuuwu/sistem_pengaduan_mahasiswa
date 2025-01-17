@@ -50,6 +50,9 @@
                     <div id="file-list" class="hidden mt-4 w-full text-left text-gray-700"></div>
                     <!-- Tombol Batal -->
                 </div>
+                @error('attachments')
+                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                @enderror
             </div>
             <button id="cancel-upload" class="hidden mt-2 px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-md w-full mb-6" onclick="cancelUpload()">Batal</button>
 
@@ -57,6 +60,9 @@
                 <label for="" class="text-blue-500 font-bold font-inter mb-2">Isi Aduan</label>
                 <textarea id="file-upload" name="description" placeholder="Tuliskan deskripsi gambar atau upload detail lainnya..."
                     class="mt-2 w-full h-32 p-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-700 placeholder-gray-400 resize-none"></textarea>
+                    @error('description')
+                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                    @enderror
             </div>
             <div class="form-components mb-6">
                 <label for="lokasi-aduan" class="text-blue-500 font-bold font-inter mb-2">Lokasi Aduan</label>
@@ -67,6 +73,9 @@
                     <option value="3">Toilet</option>
                     <option value="4">Lainnya</option>
                 </select>
+                @error('location_id')
+                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-components mb-6">
                 <label for="kategori-aduan" class="text-blue-500 font-bold font-inter mb-2">Kategori Aduan</label>
@@ -75,6 +84,9 @@
                     <option value="1">Kategori 1</option>
                     <option value="2">Kategori 2</option>
                 </select>
+                @error('category_id')
+                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-components mb-6">
                 <button type="button" onclick="showKebijakan()" class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
