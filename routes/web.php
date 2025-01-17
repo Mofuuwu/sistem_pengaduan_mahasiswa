@@ -9,10 +9,6 @@ Route::get('/buat-aduan', function () {
     return view('home.make-complaint');
 });
 
-Route::get('/detail-aduan', function () {
-    return view('home.complaint-detail');
-});
-
 Route::get('/aduan-berhasil', function () {
     return view('home.complaint-success');
 });
@@ -44,7 +40,12 @@ Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);
 Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);
 Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);
 
+Route::get('detail/{id}', [ComplaintController::class, 'detail']);
+
 Route::post('jelajahi-aduan/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
+Route::post('detail/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
+
 Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
+Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');

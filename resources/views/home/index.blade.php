@@ -51,10 +51,20 @@
     <!-- Grid Section for Cards -->
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 px-[10%]">
         <!-- Card 1 -->
+         @if ($top_complaints->isNotEmpty())
          @foreach ($top_complaints as $complaint)
-            <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
-                <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
-                <div class="flex flex-col p-5">
+            <a href="/detail/{{$complaint->id}}" class="bg-white overflow-hidden rounded-[16px] shadow-lg min-w-[356px] w-full">
+                @php
+                    $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong
+                @endphp
+                @if($firstAttachment)
+                <img class="w-full h-[180px] object-cover" 
+                    src="{{$firstAttachment->file_type == 'pdf' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXHQMBA2g77jAGv-GHfYOMYae4yuAwYcsAzg&s' : $firstAttachment->path_file}}" 
+                    alt="gambar">
+                @else
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s" alt="Card Image" class="w-full h-[180px] object-cover">
+                @endif
+                <div class="flex flex-col p-5 justify-between">
                     <div class="flex justify-between items-center">
                         <h2 class="font-inter text-md font-bold text-customblue">{{$complaint->id}}</h2>
                         <div class="font-inter text-white text-sm font-bold bg-green-500 px-[3%] flex justify-center items-center rounded-[4px]">
@@ -62,14 +72,18 @@
                         </div>
                     </div>
                     <h2 class="font-inter text-sm font-semibold text-customblue text-opacity-70">{{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</h2>
-                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <form class="font-inter text-sm font-bold flex items-center">
-                        <button type="submit" class="flex justify-start items-center text-[16px] text-gray-400"><ion-icon name="bookmark"></ion-icon></button>
-                        <p class="text-customblue">6 Dukungan</p>
-                    </form>
+                    <p class="text-sm text-gray-600">{{ \Str::limit($complaint->description, 100)}}</p>
+                    <div class="font-inter text-sm font-bold flex items-center justify-end">
+                        <p type="submit" class="flex justify-start items-center text-[16px] text-green-400"><ion-icon name="bookmark"></ion-icon></p>
+                        <p class="text-customblue">{{$complaint->supports->count()}} dukungan</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         @endforeach
+
+        @else
+            @include('layouts/components/empty-complaint')
+        @endif
 <!--         
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">

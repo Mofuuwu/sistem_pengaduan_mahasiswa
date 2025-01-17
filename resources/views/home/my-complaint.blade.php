@@ -98,7 +98,7 @@
                     src="{{$firstAttachment->file_type == 'pdf' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXHQMBA2g77jAGv-GHfYOMYae4yuAwYcsAzg&s' : $firstAttachment->path_file}}" 
                     alt="gambar">
             @else
-                <p>No attachments available</p>
+                <img class="object-cover w-full h-full bg-red-500" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s" alt="">
             @endif
             </div>
             <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
@@ -164,7 +164,7 @@
                     src="{{$firstAttachment->file_type == 'pdf' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXHQMBA2g77jAGv-GHfYOMYae4yuAwYcsAzg&s' : $firstAttachment->path_file}}" 
                     alt="gambar">
             @else
-                <p>No attachments available</p>
+                <img class="object-cover w-full h-full bg-red-500" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s" alt="">
             @endif
             </div>
             <div class="w-full md:w-2/3 p-5 flex flex-col justify-between gap-2 md:gap-0">
