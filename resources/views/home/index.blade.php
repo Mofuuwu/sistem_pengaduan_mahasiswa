@@ -1,6 +1,5 @@
 @extends('layouts/start_html')
-
-<div id="successMessage" class=" z-[1000] w-full flex justify-center items-center my-4">
+<div id="successMessage" class=" z-[1000] hidden w-full flex justify-center items-center my-4">
         <div class="bg-green-500 px-5 py-2 rounded-md text-white font-inter font-bold flex justify-between items-center">
             <span>{{session('success')}}</span>
             <button onclick="closeMessage()" class="ml-4 text-white text-lg font-bold">
@@ -52,6 +51,26 @@
     <!-- Grid Section for Cards -->
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 px-[10%]">
         <!-- Card 1 -->
+         @foreach ($top_complaints as $complaint)
+            <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
+                <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
+                <div class="flex flex-col p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="font-inter text-md font-bold text-customblue">{{$complaint->id}}</h2>
+                        <div class="font-inter text-white text-sm font-bold bg-green-500 px-[3%] flex justify-center items-center rounded-[4px]">
+                            <p>{{ $complaint->logs()->latest()->first()->name ?? 'belum ada logs' }}</p>
+                        </div>
+                    </div>
+                    <h2 class="font-inter text-sm font-semibold text-customblue text-opacity-70">{{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</h2>
+                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <form class="font-inter text-sm font-bold flex items-center">
+                        <button type="submit" class="flex justify-start items-center text-[16px] text-gray-400"><ion-icon name="bookmark"></ion-icon></button>
+                        <p class="text-customblue">6 Dukungan</p>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+<!--         
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
             <div class="flex flex-col p-5">
@@ -69,7 +88,7 @@
                 </form>
             </div>
         </div>
-        <!-- Card 2 -->
+        
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
             <div class="flex flex-col p-5">
@@ -87,25 +106,7 @@
                 </form>
             </div>
         </div>
-        <!-- Card 3 -->
-        <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
-            <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
-            <div class="flex flex-col p-5">
-                <div class="flex justify-between items-center">
-                    <h2 class="font-inter text-md font-bold text-customblue">XJAHSHAGSJ</h2>
-                    <div class="font-inter text-white text-sm font-bold bg-green-500 px-[3%] flex justify-center items-center rounded-[4px]">
-                        <p>Terverifikasi</p>
-                    </div>
-                </div>
-                <h2 class="font-inter text-sm font-semibold text-customblue text-opacity-70">Senin, 6 Januari 2025</h2>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <form class="font-inter text-sm font-bold flex items-center">
-                    <button type="submit" class="flex justify-start items-center text-[16px] text-gray-400"><ion-icon name="bookmark"></ion-icon></button>
-                    <p class="text-customblue">6 Dukungan</p>
-                </form>
-            </div>
-        </div>
-        <!-- Card 4 -->
+        
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
             <div class="flex flex-col p-5">
@@ -124,7 +125,7 @@
             </div>
         </div>
 
-        <!-- Card 5 -->
+        
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
             <div class="flex flex-col p-5">
@@ -143,7 +144,7 @@
             </div>
         </div>
 
-        <!-- Card 6 -->
+        
         <div class="bg-white overflow-hidden rounded-[16px] shadow-lg" style="width: 100%; max-width: 356px;">
             <img src="https://via.placeholder.com/356x295" alt="Card Image" class="w-full h-[180px] object-cover">
             <div class="flex flex-col p-5">
@@ -160,7 +161,7 @@
                     <p class="text-customblue">6 Dukungan</p>
                 </form>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 

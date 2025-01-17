@@ -102,7 +102,7 @@
                         <p class="font-inter font-bold text-customblue md:text-lg">{{$complaint->id}}</p>
                         <p class="font-inter font-bold text-white bg-green-500 py-[1%] px-[3%] md:py-1 md:px-3 rounded-sm md:text-sm text-[12px] w-fit absolute right-0 top-0 md:relative md:rounded-none rounded-bl-[12px]">{{$complaint->supports->count()}} Dukungan</p>
                     </div>
-                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">{{$complaint->location_id}} - {{$complaint->created_at}}</p>
+                    <p class="font-inter font-medium text-[14px] text-customblue opacity-70">{{$complaint->location_id}} - {{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</p>
                 </div>
                 <p class="font-inter font-medium text-customblue opacity-70">{{ \Str::limit($complaint->description, 100)}}</p>
                 <div class="flex justify-between items-center">

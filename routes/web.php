@@ -2,12 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-
-Route::get('/', function () {
-    return view('home.index');
-});
 
 Route::get('/buat-aduan', function () {
     return view('home.make-complaint');
@@ -20,6 +16,10 @@ Route::get('/detail-aduan', function () {
 Route::get('/aduan-berhasil', function () {
     return view('home.complaint-success');
 });
+
+//---------- HOME -------------------
+
+Route::get('/', [HomeController::class, 'index']);
 
 
 //--------- AUTH --------------------

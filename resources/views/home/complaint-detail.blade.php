@@ -59,7 +59,7 @@
                 @endforeach
                 </div>
                 <div class="bg-customgray2 p-4 rounded-lg shadow">
-                    <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{$complaint->created_at}}</p>
+                    <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</p>
                     <p class="font-inter text-customblue">{{$complaint->description}}</p>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                     @foreach($complaint->logs as $log)
                     <div class="flex flex-col justify-between border-b p-2 bg-purple-500 rounded-lg">
                         <span class="text-white font-bold">{{ $log->name }}</span>
-                        <span class="text-white opacity-90">10 Jan 2025</span>
+                        <span class="text-white opacity-90">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</span>
                     </div>
                     @endforeach
                     <!-- <div class="flex flex-col justify-between border-b p-2 bg-green-500 rounded-lg">
