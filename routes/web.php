@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,7 @@ Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del
 Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 
 Route::post('search', [ComplaintController::class, 'search_function']);
+
+
+// =========== Download ===================
+Route::get('/attachments/{id}/download', [DownloadController::class, 'downloadAttachment'])->name('attachments.download');

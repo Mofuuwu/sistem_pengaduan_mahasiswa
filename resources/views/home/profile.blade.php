@@ -13,8 +13,8 @@
 @enderror
 
 <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Profil Akun Saya</h1>
-<section class=" w-full rounded-[12px] mb-20 mt-8 flex justify-center items-center">
-<form action="/profile" method="post" class="bg-customblue p-[3%] flex items-center justify-center w-full shadow-xl rounded-[12px] max-w-md ">
+<section class="w-full rounded-[12px] mb-20 mt-8 flex justify-center items-center">
+<form action="/profile" method="post" class="bg-customblue p-[3%] flex items-center justify-center w-4/5 md:w-full shadow-xl rounded-[12px] max-w-md ">
   @csrf
   <div class="max-w-md w-full">
     <!-- Foto Profil -->
