@@ -4,17 +4,26 @@
 <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Jelajahi Aduan</h1>
 <section class="top-content w-full mt-8 relative flex flex-col justify-center items-center">
     <!-- Tombol Filter -->
-    <div class="w-full flex justify-center gap-2">
+    <form action="{{route('jelajahi-aduan')}}" method="get" class="w-full flex justify-center gap-2">
+        @csrf
         <button id="btn-filters" onclick="toggleFilter()" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
         </button>
-        <input type="text" placeholder="Cari Kata Kunci" class="bg-customgray 3/4 md:w-1/3 rounded-[12px] px-5 focus:border-none focus:outline-none">
-        <button id="" class="transition-colors duration-300 ease-in-out text-white bg-customblue py-2 px-5 rounded-[12px] flex justify-center items-center">
+        <input name="keyword" type="text" placeholder="Cari Kata Kunci" class="bg-customgray 3/4 md:w-1/3 rounded-[12px] px-5 focus:border-none focus:outline-none">
+        <button type="submit" id="" class="transition-colors duration-300 ease-in-out text-white bg-customblue py-2 px-5 rounded-[12px] flex justify-center items-center">
             <p class="font-inter font-bold">Cari</p>
         </button>
-    </div>
+    </form>
+    @if (session('error_search'))
+        <p id="error-search-message" class="flex justify-between items-center text-left font-inter font-bold bg-red-500 text-white px-3 py-1 rounded-lg">
+            <span>{{session('error_search')}}</span> 
+            <!-- <button onclick="closeErrorSearchMessage()" class="ml-4 text-white text-lg font-bold">
+                &times; 
+            </button> -->
+        </p>
+    @endif
 
     <!-- Tab Filter (Hidden by default) -->
     <form id="filter-section" class="transition-all duration-500 ease-in-out hidden transform w-full md:w-1/2 lg:w-1/2 max-w-[90%] mt-2 bg-customblue rounded-[12px] shadow-md p-4">
@@ -168,10 +177,10 @@
         </a> -->
     </div>
 </section>
-        <div class="flex justify-center mt-4 items-center w-full mb-20">
-            <!-- Custom Styling Pagination -->
-            {{ $complaints->links('vendor.pagination.custom-pagination') }}
-        </div>
+    <div class="flex justify-center mt-4 items-center w-full mb-20">
+        <!-- Custom Styling Pagination -->
+        {{ $complaints->appends(['keyword' => request()->query('keyword')])->links('vendor.pagination.custom-pagination') }}
+    </div>
 @else 
 @include('/layouts/components/empty-complaint')
 @endif

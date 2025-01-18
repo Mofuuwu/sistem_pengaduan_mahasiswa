@@ -36,4 +36,14 @@ class HelperController extends Controller
             return redirect()->back()->with('error_search', 'Aduan yang anda cari tidak ditemukan');
         }
     }
+    // public function search_complaint_by_keyword(Request $request) {
+    //     $keyword = $request['keyword'];
+    //     $complaints = Complaint::where('description', 'like', '%' . $keyword . '%')->get();
+
+    //     if ($complaints->isEmpty()) {
+    //         return redirect()->back()->with('error_search', 'Tidak ada aduan yang ditemukan dengan deskripsi yang cocok.');
+    //     }
+
+    //     return view('home.search-complaint', ['complaints' => $complaints]);
+    // }
 }

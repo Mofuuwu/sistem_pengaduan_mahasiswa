@@ -33,7 +33,7 @@ Route::post('/profile', [AuthController::class, 'editProfile'])->middleware('aut
 Route::post('/buat-aduan', [ComplaintController::class, 'handle_complaint']);
 Route::get('/buat-aduan', [ComplaintController::class, 'make_complaint']);
 
-Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint']);
+Route::get('/jelajahi-aduan', [ComplaintController::class, 'search_complaint'])->name('jelajahi-aduan');
 Route::get('jelajahi-aduan/{id}', [ComplaintController::class, 'detail']);
 
 Route::get('/aduanku', [ComplaintController::class, 'my_complaint']);

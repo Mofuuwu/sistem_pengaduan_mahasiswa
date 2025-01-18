@@ -14,23 +14,41 @@ use Illuminate\Support\Str;  // Pastikan Str digunakan untuk generate nama unik
 
 class ComplaintController extends Controller
 {
-    public function search_complaint()
-    {
+    public function search_complaint(Request $request)
+{
+    $keyword = $request->input('keyword'); // Mengambil kata kunci pencarian
+
+    if ($keyword) {
+        // Jika ada kata kunci pencarian
+        $complaints = Complaint::where('description', 'like', '%' . $keyword . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(2);
+        
+        if ($complaints->isEmpty()) {
+            return redirect()->route('jelajahi-aduan')->with('error_search', 'Tidak ada aduan yang ditemukan dengan deskripsi yang cocok.');
+        }
+    } else {
+        // Jika tidak ada kata kunci (maka tampilkan semua aduan)
         $complaints = Complaint::orderBy('created_at', 'desc')->paginate(2);
-        return view('home.search-complaint', ['complaints' => $complaints]);
     }
+
+    return view('home.search-complaint', ['complaints' => $complaints]);
+}
+
+
 
     public function detail($id)
     {
         $complaint = Complaint::findOrFail($id);
-        if(Auth::check()) {
+        if (Auth::check()) {
             $supported = $complaint->supports->contains('user_id', Auth::user()->id);
         } else {
             $supported = null;
         }
         return view('home.complaint-detail', ['complaint' => $complaint, 'supported' => $supported]);
     }
-    public function del_support($id) {
+    public function del_support($id)
+    {
         $support = Support::where('complaint_id', $id)->where('user_id', Auth::user()->id);
         $support->delete();
         return back()->with('success', 'Berhasil Membatalkan Dukungan Untuk Aduan Ini');
@@ -78,24 +96,25 @@ class ComplaintController extends Controller
         return view('home.supported-complaint', ['supported_complaints' => $supported_complaints]);
     }
 
-    public function make_complaint() {
+    public function make_complaint()
+    {
         $rules = Rules::all();
         return view('home.make-complaint', ['rules' => $rules]);
     }
     public function handle_complaint(Request $request)
     {
         $request->validate([
-            'description' => 'required|string',  
-            'location_id' => 'required',  
-            'category_id' => 'required',  
-            'attachments' => 'required', 
+            'description' => 'required|string',
+            'location_id' => 'required',
+            'category_id' => 'required',
+            'attachments' => 'required',
         ], [
             'description.required' => 'Deskripsi aduan harus diisi.',
-            'attachments.required' => 'Sertakan minimal 1 bukti foto atau menggunakan pdf', 
+            'attachments.required' => 'Sertakan minimal 1 bukti foto atau menggunakan pdf',
             'location_id.required' => 'Lokasi aduan harus dipilih.',
             'category_id.required' => 'Kategori aduan harus dipilih.',
         ]);
-    
+
         $currentDate = now()->format('YmdHis'); // Format: YYYYMMDDHHMMSS
 
         // Mencari ID yang terakhir pada hari yang sama berdasarkan prefix (timestamp) yang sudah ada
