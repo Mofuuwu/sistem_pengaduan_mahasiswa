@@ -20,7 +20,8 @@
 @include('layouts/components/navbar')
 
 <section class="my-search bg-customgray bg-opacity-40 mt-20 px-4 sm:px-6 md:px-[10%] flex justify-center items-center flex-col">
-    <form action="search" method="post" class="form-input flex flex-col gap-4 w-full mt-24 my-20">
+    <form action="{{route('search_complaint_by_id')}}" method="post" class="form-input flex flex-col gap-4 w-full mt-24 my-20">
+        @csrf
         <!-- Teks di atas -->
         <p class="text-customblue font-inter font-bold mb-2 text-center sm:text-left">
             Sudah Pernah Melakukan Pengaduan? Cek Disini
@@ -29,7 +30,7 @@
         <!-- Input dan Button dalam satu baris -->
         <div class="flex flex-col sm:flex-row w-full gap-4">
             <!-- Input Field -->
-            <input type="text" name="keyword" placeholder="Contoh : 20250116015433001 (Kode Unik 17 Digit)"
+            <input type="number" maxlength="17" required name="keyword" placeholder="Contoh : 20250116015433001 (Kode Unik 17 Digit)"
                 class="px-5 py-3 rounded-[12px] w-full sm:w-[75%] bg-customgray2 border-[3px] border-customblue border-opacity-50 font-inter font-bold text-customblue">
             <!-- Button -->
             <button type="submit"
@@ -37,7 +38,14 @@
                 Cari Aduan
             </button>
         </div>
-        <p class=" text-left font-inter font-bold text-red-500">*Aduan Tidak Ditemukan</p>
+        @if (session('error_search'))
+            <p id="error-search-message" class="flex justify-between items-center text-left font-inter font-bold bg-red-500 text-white px-3 py-1 rounded-lg">
+                <span>{{session('error_search')}}</span> 
+                <!-- <button onclick="closeErrorSearchMessage()" class="ml-4 text-white text-lg font-bold">
+                    &times; 
+                </button> -->
+            </p>
+        @endif
 
         <!-- Teks di bawah input dan button -->
         <p class="text-customblue font-inter mt-4 text-center sm:text-left flex justify-center">
@@ -287,6 +295,12 @@
 <script>
     function closeMessage() {
         const messageBox = document.getElementById('successMessage');
+        if (messageBox) {
+            messageBox.style.display = 'none';
+        }
+    }
+    function closeErrorSearchMessage() {
+        const messageBox = document.getElementById('error-search-message');
         if (messageBox) {
             messageBox.style.display = 'none';
         }

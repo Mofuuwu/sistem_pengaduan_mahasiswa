@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComplaintController;
-use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +42,7 @@ Route::get('/aduan-didukung', [ComplaintController::class, 'supported_complaint'
 Route::get('aduanku/{id}', [ComplaintController::class, 'detail']);
 Route::get('aduan-didukung/{id}', [ComplaintController::class, 'detail']);
 
-Route::get('detail/{id}', [ComplaintController::class, 'detail']);
+Route::get('detail/{id}', [ComplaintController::class, 'detail'])->name('complaint_detail');
 
 Route::post('jelajahi-aduan/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
@@ -52,8 +52,8 @@ Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::clas
 Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 
-Route::post('search', [ComplaintController::class, 'search_function']);
+Route::post('search', [HelperController::class, 'search_complaint_by_id'])->name('search_complaint_by_id');
 
 
 // =========== Download ===================
-Route::get('/attachments/{id}/download', [DownloadController::class, 'downloadAttachment'])->name('attachments.download');
+Route::get('/attachments/{id}/download', [HelperController::class, 'downloadAttachment'])->name('attachments.download');

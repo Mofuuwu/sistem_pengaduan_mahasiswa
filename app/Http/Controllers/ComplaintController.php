@@ -77,10 +77,6 @@ class ComplaintController extends Controller
         }
         return view('home.supported-complaint', ['supported_complaints' => $supported_complaints]);
     }
-    public function search_function()
-    {
-        
-    }
 
     public function make_complaint() {
         $rules = Rules::all();

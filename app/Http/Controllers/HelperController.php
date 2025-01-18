@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attachment;
-class DownloadController extends Controller
+use App\Models\Complaint;
+
+class HelperController extends Controller
 {
     public function downloadAttachment($id)
     {
@@ -22,5 +24,16 @@ class DownloadController extends Controller
     
         // Unduh file
         return response()->download($filePath)->deleteFileAfterSend(false);
+    }
+    public function search_complaint_by_id(Request $request)
+    {
+        $keyword = $request['keyword'];
+        $complaint = Complaint::find($keyword);
+    
+        if ($complaint) {
+            return redirect()->route('complaint_detail', $complaint->id);
+        } else {
+            return redirect()->back()->with('error_search', 'Aduan yang anda cari tidak ditemukan');
+        }
     }
 }
