@@ -1,17 +1,20 @@
 @extends('layouts/start_html')
 
-@include('layouts/components/navbar')
-
-<h1 class="text-3xl font-bold font-inter text-customblue text-center mt-20">Login</h1>
-@if (session('success'))
+<div class="bg-customblue w-full h-screen overflow-hidden">
+<!-- @if (session('success'))
     <div class="w-full flex justify-center items-center my-4">
         <div class="bg-green-500 px-3 py-1 rounded-md w-fit text-white font-inter font-bold">
             {{ session('success') }}
         </div>
     </div>
-@endif
-<section class="mt-8 mb-20 px-[10%]">
-    <form action="{{route('user-login')}}" method="post" class="w-full max-w-md mx-auto bg-customgray p-6 rounded-lg shadow">
+@endif -->
+<section class="p-[10%] pt-20">
+<h1 class="text-3xl font-bold font-inter text-white text-center">Login Admin</h1>
+<div class="flex w-full justify-center items-center">
+    <img class="w-8" src="{{asset('BrandLogo.jpg')}}" alt="">
+    <h1 class="text-xl font-bold font-inter text-white text-center">Keluh Kampus</h1>
+</div>
+    <form action="{{route('admin-login')}}" method="post" class="w-full mt-8 max-w-md mx-auto bg-customgray p-6 rounded-lg shadow">
         @csrf
         <div class="mb-4">
             <label for="email_login" class="block text-customblue font-bold mb-2">Email</label>
@@ -28,10 +31,7 @@
             @enderror
         </div>
         <button type="submit" class="w-full bg-customblue text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Login</button>
-        <p class="text-customblue font-medium text-center mt-2">belum memiliki akun? silahkan <a class="font-bold" href="{{route('user-register')}}">register</a></p>
     </form>
 </section>
-
-@include('layouts/components/footer')
-
+</div>
 @extends('layouts/end_html')

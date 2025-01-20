@@ -5,7 +5,7 @@
 <h1 class="text-3xl font-bold font-inter text-customblue text-center mt-20">Register</h1>
 
 <section class="mt-8 mb-20 px-[10%]">
-    <form action="/register" method="post" id="registration-form" class="w-full max-w-md mx-auto bg-customgray p-6 rounded-lg shadow">
+    <form action="{{route('user-register')}}" method="post" id="registration-form" class="w-full max-w-md mx-auto bg-customgray p-6 rounded-lg shadow">
         @csrf    
         <!-- Step 1 -->
         <div id="step-1" class="form-step">
@@ -39,7 +39,7 @@
             </div>
 
             <button type="button" id="next-button" class="w-full bg-customblue text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Next</button>
-            <p class="text-customblue font-medium text-center mt-2">sudah memiliki akun? silahkan <a class="font-bold" href="/login">login</a></p>
+            <p class="text-customblue font-medium text-center mt-2">sudah memiliki akun? silahkan <a class="font-bold" href="{{route('user-login')}}">login</a></p>
         </div>
 
         <!-- Step 2 -->

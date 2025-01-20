@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function login_admin(){
+        return view('home.auth.login-admin');
+    }
+    public function doLoginAdmin(Request $request)
+{
+    // Validasi input email dan password
+    $validatedData = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
+        $user = Auth::user(); 
+        if ($user->role_id == 1) {
+            return redirect('admin');
+        } elseif ($user->role_id == 2) {
+            return redirect('employee');
+        } else {
+            return redirect('/')->with('error', 'Anda tidak memiliki akses ke sistem');
+        }
+    }
+
+    // Jika login gagal, kembali ke halaman login dengan pesan error
+    return redirect()->back()->withErrors(['email' => 'Email atau password salah.']);
+}
+
+
     public function register()
     {
         return view('home.auth.register');

@@ -9,6 +9,16 @@
         </div>
 </div>
 @endif
+@if(session('error'))
+<div id="successMessage" class=" z-[1000] w-full flex justify-center items-center my-4">
+        <div class="bg-red-500 px-5 py-2 rounded-md text-white font-inter font-bold flex justify-between items-center">
+            <span>{{session('error')}}</span>
+            <button onclick="closeMessage()" class="ml-4 text-white text-lg font-bold">
+                &times; <!-- Simbol 'x' -->
+            </button>
+        </div>
+</div>
+@endif
 
 <section class="my-top">
     <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Keluh Kampus</h1>

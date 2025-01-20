@@ -11,4 +11,4 @@
     @vite('resources/css/app.css')
 </head>
 <!-- <body style="background-color: #CCE4EB;"> -->
-<body class="">
+<body>
