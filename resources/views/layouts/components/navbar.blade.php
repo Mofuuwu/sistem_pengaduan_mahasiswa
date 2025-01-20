@@ -5,7 +5,7 @@
 <section class="my-nav w-full flex justify-center position-sticky top-0 z-50 {{ Request::is('/') ? 'mt-20' : '' }}" style="position:sticky; top:1%;">
     <nav class="flex lg:w-fit md:w-fit bg-customblue p-1 items-center justify-between rounded-[12px] py-3 px-5 gap-4 w-[95%]">
         <div class="logo w-[30px] h-[30px] overflow-hidden rounded-full cursor-pointer" id="logo">
-            <img class="w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABSta4ztO2Z73YCEvZDFgCPesndhqt-seBg&s" alt="Logo">
+            <img class="w-full h-full object-cover" src="{{asset('BrandLogo.jpg')}}" alt="Logo">
         </div>
 
         <div class="text-white text-bold gap-5 font-inter font-bold hidden md:flex">

@@ -11,7 +11,7 @@
 @endif
 
 <section class="my-top">
-    <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Pengaduan Mahasiswa</h1>
+    <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Keluh Kampus</h1>
     <div class="flex justify-center items-center">
         <p class="w-1/2 font-inter font-normal text-center text-customblue opacity-50">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
     </div>

@@ -13,7 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                inter: ['Inter', 'serif'],
+                inter: ['Inter', 'sans-serif'],
             },
             colors: {
                 customblue: '#2E5077',

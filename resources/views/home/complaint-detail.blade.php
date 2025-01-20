@@ -14,10 +14,10 @@
 </div>
 @endif
 
-<div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+<div id="loginModal" class="font-inter fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white rounded-lg shadow-lg w-96 p-6">
         <h2 class="text-xl font-bold text-gray-800">Login Diperlukan</h2>
-        <p class="mt-4 text-gray-600">Anda perlu login untuk mendukung keluhan ini.</p>
+        <p class="mt-4 text-gray-600">Anda perlu login untuk mendukung aduan ini.</p>
         <div class="mt-6 flex justify-end gap-2">
             <button
                 onclick="hideLoginModal()"
