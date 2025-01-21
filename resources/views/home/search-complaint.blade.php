@@ -91,7 +91,7 @@
 <section id="" class="flex w-full px-[5%] lg:px-[10%] md:px-[10%] mb-20 mt-8">
     <div class="container-card flex flex-col gap-4 w-full">
         @foreach ($complaints as $complaint)
-        <a href="jelajahi-aduan/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
+        <a href="jelajahi-aduan/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative shadow-sm">
             <div class="img w-full max-h-[200px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
             @php
                 $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong

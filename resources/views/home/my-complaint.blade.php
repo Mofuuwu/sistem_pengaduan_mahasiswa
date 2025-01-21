@@ -87,7 +87,7 @@
     <h2 class="text-center font-inter font-bold text-customblue mt-8 my-4">Menampilkan {{ $complaints->count() }} dari {{ $complaints->total() }} Aduan</h2>
     <div class="container-card flex flex-col gap-4">
         @foreach ($complaints as $complaint)
-        <a href="aduanku/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative">
+        <a href="aduanku/{{$complaint->id}}" class="w-full bg-customgray2 flex rounded-[16px] overflow-hidden bg-opacity-80 hover:bg-opacity-100 flex-col lg:flex-row md:flex-row relative shadow-sm">
             <div class="img w-full max-h-[200px] md:w-1/3 md:h-auto flex justify-center items-center overflow-hidden">
             @php
                 $firstAttachment = $complaint->attachments->first(); // Ambil attachment pertama, atau null jika kosong

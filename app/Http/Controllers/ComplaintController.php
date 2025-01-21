@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attachment;
+use App\Models\Category;
 use App\Models\Complaint;
+use App\Models\Location;
 use App\Models\Logs;
 use App\Models\Rules;
 use App\Models\Support;
@@ -99,7 +101,9 @@ class ComplaintController extends Controller
     public function make_complaint()
     {
         $rules = Rules::all();
-        return view('home.make-complaint', ['rules' => $rules]);
+        $categories = Category::all();
+        $locations = Location::all();
+        return view('home.make-complaint', ['rules' => $rules, 'categories' => $categories, 'locations' => $locations]);
     }
     public function handle_complaint(Request $request)
     {

@@ -68,10 +68,9 @@
                 <label for="lokasi-aduan" class="text-blue-500 font-bold font-inter mb-2">Lokasi Aduan</label>
                 <select id="lokasi-aduan" name="location_id" class="mt-2 w-full h-12 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-700 placeholder-gray-400">
                     <option value="" disabled selected>Pilih Lokasi Aduan</option>
-                    <option value="1">Aula</option>
-                    <option value="2">Kantin</option>
-                    <option value="3">Toilet</option>
-                    <option value="4">Lainnya</option>
+                    @foreach ($locations as $loc)
+                        <option value="{{$loc->id}}">{{$loc->name}}</option>
+                    @endforeach
                 </select>
                 @error('location_id')
                         <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
@@ -81,8 +80,9 @@
                 <label for="kategori-aduan" class="text-blue-500 font-bold font-inter mb-2">Kategori Aduan</label>
                 <select id="kategori-aduan" name="category_id" class="mt-2 w-full h-12 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-700 placeholder-gray-400">
                     <option value="" disabled selected>Pilih Kategori Aduan</option>
-                    <option value="1">Kategori 1</option>
-                    <option value="2">Kategori 2</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                    @endforeach
                 </select>
                 @error('category_id')
                         <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
