@@ -12,18 +12,22 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Contracts\HasTable;
 class RulesResource extends Resource
 {
     protected static ?string $model = Rules::class;
-
+    protected static ?string $modelLabel = 'Kebijakan Aduan';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Kebijakan Aduan';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('description')
+                ->label('Deskripsi Kebijakan')
+                ->columnSpan(2)
             ]);
     }
 
@@ -31,19 +35,32 @@ class RulesResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('')->state(
+                    static function (HasTable $livewire, $rowLoop): string {
+                        return (string) (
+                            $rowLoop->iteration +
+                            ($livewire->getTableRecordsPerPage() * (
+                                $livewire->getTablePage() - 1
+                            ))
+                        );
+                    }
+                )->label('No')
+                ->width(1)
+                ->alignStart(),
                 Tables\Columns\TextColumn::make('description')
-                ->label('Deskripsi')
+                ->label('Deskripsi Kebijakan')
+                ->columnSpanFull()
+                ->alignStart()
+                ->limit(70)
             ])
             ->filters([
                 
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -58,8 +75,6 @@ class RulesResource extends Resource
     {
         return [
             'index' => Pages\ListRules::route('/'),
-            'create' => Pages\CreateRules::route('/create'),
-            'edit' => Pages\EditRules::route('/{record}/edit'),
         ];
     }
 }

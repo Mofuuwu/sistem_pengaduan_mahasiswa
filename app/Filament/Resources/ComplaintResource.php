@@ -18,6 +18,10 @@ class ComplaintResource extends Resource
     protected static ?string $model = Complaint::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Data Aduan';
+    protected static ?string $navigationGroup = 'Aduan';
+    
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -73,4 +77,17 @@ class ComplaintResource extends Resource
             'edit' => Pages\EditComplaint::route('/{record}/edit'),
         ];
     }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Aduan';
+    }
+    
 }

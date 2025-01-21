@@ -60,7 +60,7 @@
         <!-- Teks di bawah input dan button -->
         <p class="text-customblue font-inter mt-4 text-center sm:text-left flex justify-center">
             <span class="font-medium">Ingin melakukan pengaduan?</span>
-            <a href="#" class="font-bold">Login Sekarang</a>
+            <a href="{{route('user-login')}}" class="font-bold">Login Sekarang</a>
         </p>
     </form>
 </section>

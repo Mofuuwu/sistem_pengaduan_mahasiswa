@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListLocations extends ListRecords
 {
     protected static string $resource = LocationResource::class;
+    protected static ?string $title = 'Lokasi Aduan';
 
     protected function getHeaderActions(): array
     {

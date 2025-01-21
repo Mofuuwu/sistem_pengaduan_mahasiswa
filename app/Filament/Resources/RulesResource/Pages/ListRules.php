@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListRules extends ListRecords
 {
     protected static string $resource = RulesResource::class;
-    protected static ?string $title = 'Rules Aduan';
+    protected static ?string $title = 'Kebijakan Aduan';
 
     protected function getHeaderActions(): array
     {

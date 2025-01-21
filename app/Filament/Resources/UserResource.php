@@ -18,6 +18,9 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Data User';
+    protected static ?string $navigationGroup = 'User';
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -66,5 +69,17 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua User';
     }
 }

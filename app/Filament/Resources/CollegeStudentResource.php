@@ -19,6 +19,9 @@ class CollegeStudentResource extends Resource
     protected static ?string $model = CollegeStudent::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Data Mahasiswa';
+    protected static ?string $navigationGroup = 'User';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -86,5 +89,17 @@ class CollegeStudentResource extends Resource
             // 'view' => Pages\ViewCollegeStudent::route('/{record}'),
             'edit' => Pages\EditCollegeStudent::route('/{record}/edit'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Mahasiswa';
     }
 }

@@ -15,25 +15,25 @@ use Illuminate\Support\Str;  // Pastikan Str digunakan untuk generate nama unik
 class ComplaintController extends Controller
 {
     public function search_complaint(Request $request)
-{
-    $keyword = $request->input('keyword'); // Mengambil kata kunci pencarian
+    {
+        $keyword = $request->input('keyword'); // Mengambil kata kunci pencarian
 
-    if ($keyword) {
-        // Jika ada kata kunci pencarian
-        $complaints = Complaint::where('description', 'like', '%' . $keyword . '%')
-            ->orderBy('created_at', 'desc')
-            ->paginate(2);
-        
-        if ($complaints->isEmpty()) {
-            return redirect()->route('jelajahi-aduan')->with('error_search', 'Tidak ada aduan yang ditemukan dengan deskripsi yang cocok.');
+        if ($keyword) {
+            // Jika ada kata kunci pencarian
+            $complaints = Complaint::where('description', 'like', '%' . $keyword . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(2);
+
+            if ($complaints->isEmpty()) {
+                return redirect()->route('jelajahi-aduan')->with('error_search', 'Tidak ada aduan yang ditemukan dengan deskripsi yang cocok.');
+            }
+        } else {
+            // Jika tidak ada kata kunci (maka tampilkan semua aduan)
+            $complaints = Complaint::orderBy('created_at', 'desc')->paginate(2);
         }
-    } else {
-        // Jika tidak ada kata kunci (maka tampilkan semua aduan)
-        $complaints = Complaint::orderBy('created_at', 'desc')->paginate(2);
-    }
 
-    return view('home.search-complaint', ['complaints' => $complaints]);
-}
+        return view('home.search-complaint', ['complaints' => $complaints]);
+    }
 
 
 
@@ -89,7 +89,7 @@ class ComplaintController extends Controller
         if (Auth::check()) {
             $supported_complaints = Complaint::whereHas('supports', function ($query) {
                 $query->where('user_id', Auth::user()->id);
-            })->paginate(2);
+            })->orderBy('created_at', 'desc')->paginate(2);
         } else {
             $supported_complaints = null;
         }
