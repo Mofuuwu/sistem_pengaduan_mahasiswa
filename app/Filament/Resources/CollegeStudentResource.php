@@ -6,9 +6,11 @@ use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
+use App\Models\Complaint;
 use Filament\Tables\Table;
 use App\Models\CollegeStudent;
 use Filament\Resources\Resource;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollegeStudentResource\Pages;
@@ -47,7 +49,6 @@ class CollegeStudentResource extends Resource
                 Forms\Components\DatePicker::make('created_at')
                 ->label('Dibuat Pada')
                 ->disabled(),
-
             ]);
     }
 
@@ -55,10 +56,28 @@ class CollegeStudentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('')->state(
+                    static function (HasTable $livewire, $rowLoop): string {
+                        return (string) (
+                            $rowLoop->iteration +
+                            ($livewire->getTableRecordsPerPage() * (
+                                $livewire->getTablePage() - 1
+                            ))
+                        );
+                    }
+                )->label('No')
+                ->width(1),
                 Tables\Columns\TextColumn::make('nim')
-                ->label('NIM'),
+                ->label('NIM')
+                ->width(1),
                 Tables\Columns\TextColumn::make('user.name')
-                ->label('Nama')
+                ->label('Nama'),
+                Tables\Columns\TextColumn::make('total_complaints')
+                ->label('Aduan Dibuat')
+                ->state(static function ($record) {
+                    $userId = $record->user_id;
+                    return Complaint::where('user_id', $userId)->count();
+                }),
             ])
             ->filters([
                 //
@@ -68,9 +87,6 @@ class CollegeStudentResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -85,8 +101,6 @@ class CollegeStudentResource extends Resource
     {
         return [
             'index' => Pages\ListCollegeStudents::route('/'),
-            // 'create' => Pages\CreateCollegeStudent::route('/create'),
-            // 'view' => Pages\ViewCollegeStudent::route('/{record}'),
             'edit' => Pages\EditCollegeStudent::route('/{record}/edit'),
         ];
     }

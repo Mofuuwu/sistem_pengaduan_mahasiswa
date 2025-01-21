@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -43,6 +44,16 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])->navigationGroups([
+                NavigationGroup::make()
+                     ->label('Aduan')
+                     ->collapsible(false),
+                NavigationGroup::make()
+                    ->label('User')
+                    ->collapsible(false),
+                NavigationGroup::make()
+                    ->label('Form Aduan')
+                    ->collapsible(false),
             ])
             ->middleware([
                 EncryptCookies::class,

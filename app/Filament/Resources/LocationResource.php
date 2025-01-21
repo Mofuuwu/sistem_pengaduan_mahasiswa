@@ -21,6 +21,7 @@ class LocationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Lokasi Aduan';
+    protected static ?string $navigationGroup = 'Form Aduan';
 
     public static function form(Form $form): Form
     {

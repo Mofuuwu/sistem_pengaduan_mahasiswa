@@ -41,4 +41,31 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+    public function data1() {
+        return $this->state([
+            'id' => '1',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'role_id' => '1',
+        ]);
+    }
+    public function data2() {
+        return $this->state([
+            'id' => '2',
+            'name' => 'Muhammad Rifqi',
+            'email' => 'muhammadrifqi@gmail.com',
+            'password' => bcrypt('muhammadrifqi'),
+            'role_id' => '3',
+        ]);
+    }
+    public function data3() {
+        return $this->state([
+            'id' => '3',
+            'name' => 'Muhhamad Hasan',
+            'email' => 'muhhamadhasan@gmail.com',
+            'password' => bcrypt('muhhamadhasan'),
+            'role_id' => '3',
+        ]);
+    }
 }

@@ -19,6 +19,7 @@ class RulesResource extends Resource
     protected static ?string $modelLabel = 'Kebijakan Aduan';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Kebijakan Aduan';
+    protected static ?string $navigationGroup = 'Form Aduan';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form

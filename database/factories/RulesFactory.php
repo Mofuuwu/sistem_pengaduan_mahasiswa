@@ -20,12 +20,12 @@ class RulesFactory extends Factory
             //
         ];
     }
-    public function r1() {
+    public function data1() {
         return $this->state([
             'description' => 'Pengaduan harus disertai bukti gambar atau dokumen pendukung.',
         ]);
     }
-    public function r2() {
+    public function data2() {
         return $this->state([
             'description' => 'Pengaduan tidak mengandung unsur SARA atau fitnah.',
         ]);

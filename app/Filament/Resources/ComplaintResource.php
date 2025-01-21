@@ -18,8 +18,9 @@ class ComplaintResource extends Resource
     protected static ?string $model = Complaint::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Data Aduan';
+    protected static ?string $navigationLabel = 'Semua Aduan';
     protected static ?string $navigationGroup = 'Aduan';
+    protected static ?string $modelLabel = 'Semua Aduan';
     
     protected static ?int $navigationSort = 4;
 
@@ -41,9 +42,6 @@ class ComplaintResource extends Resource
                 ->label('Lokasi'),
                 Tables\Columns\TextColumn::make('category.name')
                 ->label('Nama'),
-                Tables\Columns\TextColumn::make('description')
-                ->label('Deskripsi')
-                ->limit(30),
                 Tables\Columns\TextColumn::make('logs.name')
                 ->label('Status')
                 ->limit(30),
@@ -56,9 +54,6 @@ class ComplaintResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
