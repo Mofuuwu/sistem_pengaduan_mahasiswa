@@ -11,7 +11,10 @@ DONE => error pada notif di index terutama ketika login tidak mau muncul
 DONE => membuat tampilan aduan sukses terkirim
 DONE => membuat tampilan detail jika format yg dikirim adalah pdf dan download
 DONE => melanjutkan fitur cari
+DONE => membuat database seeder dan database Factory
 
+mencoba login admin di halaman login user dan berhasil login (akan diarahkan kemana)
+memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
 menambahkan resource untuk program studi dan fakultas pada data mahasiswa
 memperbaiki bug responsif di beranda/index
 
