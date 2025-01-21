@@ -24,7 +24,7 @@ class ComplaintFactory extends Factory
     public function data1() {
         return $this->state([
             'id' => '20250116015433001',
-            'user_id' => '1',
+            'user_id' => '3',
             'location_id' => '1',
             'category_id' => '1',
             'description' => 'Fasilitas ruang kelas rusak, beberapa kursi tidak dapat digunakan dan meja patah.',
@@ -36,7 +36,7 @@ class ComplaintFactory extends Factory
     public function data2() {
         return $this->state([
             'id' => '20250116025234001',
-            'user_id' => '1',
+            'user_id' => '3',
             'location_id' => '2',
             'category_id' => '2',
             'description' => 'Kebersihan kampus kurang terjaga, banyak sampah berserakan di area parkir.',
@@ -48,7 +48,7 @@ class ComplaintFactory extends Factory
     public function data3() {
         return $this->state([
             'id' => '20250116025416001',
-            'user_id' => '1',
+            'user_id' => '3',
             'location_id' => '3',
             'category_id' => '3',
             'description' => 'Keamanan kampus terganggu, penerangan jalan menuju asrama sangat minim.',
@@ -108,7 +108,7 @@ class ComplaintFactory extends Factory
     public function data8() {
         return $this->state([
             'id' => '20250117140040001',
-            'user_id' => '1',
+            'user_id' => '3',
             'location_id' => '1',
             'category_id' => '2',
             'description' => 'Toilet di gedung A sangat kotor, tidak ada petugas yang membersihkan secara rutin.',
@@ -144,7 +144,7 @@ class ComplaintFactory extends Factory
     public function data11() {
         return $this->state([
             'id' => '20250121093747001',
-            'user_id' => '1',
+            'user_id' => '3',
             'location_id' => '2',
             'category_id' => '3',
             'description' => 'Ada tindak kekerasan yang dilakukan oleh mahasiswa senior terhadap mahasiswa baru.',
