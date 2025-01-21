@@ -19,7 +19,7 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
     protected static ?int $navigationSort = 2;
     protected static ?string $modelLabel = 'Kategori Aduan';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-rectangle-stack';
     protected static ?string $navigationLabel = 'Kategori Aduan';
     protected static ?string $navigationGroup = 'Form Aduan';
 
@@ -79,4 +79,16 @@ class CategoryResource extends Resource
             'index' => Pages\ListCategories::route('/'),
         ];
     } 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Kategori Aduan';
+    }
 }

@@ -17,7 +17,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-users';
     protected static ?string $navigationLabel = 'Data User';
     protected static ?string $navigationGroup = 'User';
     protected static ?int $navigationSort = 6;
@@ -49,7 +49,7 @@ class UserResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                
+
             ]);
     }
 
@@ -74,7 +74,7 @@ class UserResource extends Resource
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return 'success';
+        return 'primary';
     }
     public static function getNavigationBadgeTooltip(): ?string
     {

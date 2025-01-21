@@ -15,14 +15,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollegeStudentResource\Pages;
 use App\Filament\Resources\CollegeStudentResource\RelationManagers;
+use App\Models\Faculty;
+use App\Models\StudyProgram;
 
 class CollegeStudentResource extends Resource
 {
     protected static ?string $model = CollegeStudent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
     protected static ?string $navigationLabel = 'Data Mahasiswa';
     protected static ?string $navigationGroup = 'User';
+    protected static ?string $modelLabel = 'Semua Mahasiswa';
     protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
@@ -30,25 +33,52 @@ class CollegeStudentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nim')
-                ->label('Nim')
-                ->columnSpan(2),
+                    ->label('Nim')
+                    ->columnSpan(2)
+                    ->required(),
                 Forms\Components\Select::make('user_id')
-                ->label('Nama User')
-                ->options(User::pluck('name', 'id'))
-                ->searchable()
-                ->disabled()
-                ->columnSpan(2),
+                    ->label('Nama User')
+                    ->options(User::pluck('name', 'id'))
+                    ->disabled()
+                    ->columnSpan(2),
+                Forms\Components\Select::make('study_program_id')
+                    ->label('Program Studi')
+                    ->options(fn($get) => StudyProgram::pluck('name', 'id'))  // Menampilkan semua program studi awal
+                    ->searchable()
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $studyProgram = StudyProgram::find($state);
+                        if ($studyProgram) {
+                            $set('faculty_id', $studyProgram->faculty_id);
+                        }
+                    }),
+
+                Forms\Components\Select::make('faculty_id')
+                    ->label('Fakultas')
+                    ->options(fn($get) => Faculty::pluck('name', 'id')) // Menampilkan semua fakultas
+                    ->searchable()
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $set('study_program_id', null);
+                    })
+                    ->disabled()
+                    ->dehydrated(),
                 Forms\Components\TextArea::make('address')
-                ->label('Alamat')
-                ->columnSpan(2),
+                    ->label('Alamat')
+                    ->columnSpan(2)
+                    ->required(),
                 Forms\Components\TextInput::make('phone_number')
-                ->label('Nomor Telepon')
-                ->columnSpan(2),
+                    ->label('Nomor Telepon')
+                    ->columnSpan(2)
+                    ->required(),
                 Forms\Components\DatePicker::make('dob')
-                ->label('Tanggal Lahir'),
+                    ->label('Tanggal Lahir')
+                    ->required(),
                 Forms\Components\DatePicker::make('created_at')
-                ->label('Dibuat Pada')
-                ->disabled(),
+                    ->label('Dibuat Pada')
+                    ->disabled(),
             ]);
     }
 
@@ -66,18 +96,18 @@ class CollegeStudentResource extends Resource
                         );
                     }
                 )->label('No')
-                ->width(1),
+                    ->width(1),
                 Tables\Columns\TextColumn::make('nim')
-                ->label('NIM')
-                ->width(1),
+                    ->label('NIM')
+                    ->width(1),
                 Tables\Columns\TextColumn::make('user.name')
-                ->label('Nama'),
+                    ->label('Nama'),
                 Tables\Columns\TextColumn::make('total_complaints')
-                ->label('Aduan Dibuat')
-                ->state(static function ($record) {
-                    $userId = $record->user_id;
-                    return Complaint::where('user_id', $userId)->count();
-                }),
+                    ->label('Aduan Dibuat')
+                    ->state(static function ($record) {
+                        $userId = $record->user_id;
+                        return Complaint::where('user_id', $userId)->count();
+                    }),
             ])
             ->filters([
                 //
@@ -86,8 +116,7 @@ class CollegeStudentResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
-            ->bulkActions([
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array
@@ -110,7 +139,7 @@ class CollegeStudentResource extends Resource
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return 'success';
+        return 'primary';
     }
     public static function getNavigationBadgeTooltip(): ?string
     {

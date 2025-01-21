@@ -19,7 +19,7 @@ class StudyProgramResource extends Resource
 {
     protected static ?string $model = StudyProgram::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-building-library';
     protected static ?string $modelLabel = 'Daftar Program Studi';
     protected static ?string $navigationLabel = 'Program Studi';
     protected static ?string $navigationGroup = 'Data Universitas';
@@ -84,5 +84,17 @@ class StudyProgramResource extends Resource
         return [
             'index' => Pages\ListStudyPrograms::route('/'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Program Studi';
     }
 }

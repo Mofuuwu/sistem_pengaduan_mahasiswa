@@ -18,7 +18,7 @@ class FacultyResource extends Resource
 {
     protected static ?string $model = Faculty::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-academic-cap';
     protected static ?string $modelLabel = 'Daftar Fakultas';
     protected static ?string $navigationLabel = 'Fakultas';
     protected static ?string $navigationGroup = 'Data Universitas';
@@ -76,5 +76,17 @@ class FacultyResource extends Resource
         return [
             'index' => Pages\ListFaculties::route('/'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Fakultas';
     }
 }

@@ -44,17 +44,18 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
-            ])->navigationGroups([
-                NavigationGroup::make()
-                     ->label('Aduan')
-                     ->collapsible(false),
-                NavigationGroup::make()
-                    ->label('User')
-                    ->collapsible(false),
-                NavigationGroup::make()
-                    ->label('Form Aduan')
-                    ->collapsible(false),
             ])
+            //AGAR NAVBAR GRUP NYA TIDAK COLLAPSE
+            // ->navigationGroups([
+            //     NavigationGroup::make()
+            //          ->label('Aduan'),
+            //     NavigationGroup::make()
+            //         ->label('User')
+            //         ->collapsible(false),
+            //     NavigationGroup::make()
+            //         ->label('Form Aduan')
+            //         ->collapsible(false),
+            // ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

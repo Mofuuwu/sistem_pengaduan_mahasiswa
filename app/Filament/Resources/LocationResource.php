@@ -19,7 +19,7 @@ class LocationResource extends Resource
     protected static ?int $navigationSort = 3;
     protected static ?string $modelLabel = 'Lokasi Aduan';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-map-pin';
     protected static ?string $navigationLabel = 'Lokasi Aduan';
     protected static ?string $navigationGroup = 'Form Aduan';
 
@@ -78,5 +78,17 @@ class LocationResource extends Resource
         return [
             'index' => Pages\ListLocations::route('/'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Lokasi Aduan';
     }
 }

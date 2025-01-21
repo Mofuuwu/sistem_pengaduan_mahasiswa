@@ -17,7 +17,7 @@ class RulesResource extends Resource
 {
     protected static ?string $model = Rules::class;
     protected static ?string $modelLabel = 'Kebijakan Aduan';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-shield-check';
     protected static ?string $navigationLabel = 'Kebijakan Aduan';
     protected static ?string $navigationGroup = 'Form Aduan';
     protected static ?int $navigationSort = 1;
@@ -77,5 +77,17 @@ class RulesResource extends Resource
         return [
             'index' => Pages\ListRules::route('/'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Kebijakan Aduan';
     }
 }

@@ -17,7 +17,7 @@ class ComplaintResource extends Resource
 {
     protected static ?string $model = Complaint::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-megaphone';
     protected static ?string $navigationLabel = 'Semua Aduan';
     protected static ?string $navigationGroup = 'Aduan';
     protected static ?string $modelLabel = 'Semua Aduan';
@@ -78,7 +78,7 @@ class ComplaintResource extends Resource
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return 'success';
+        return 'primary';
     }
     public static function getNavigationBadgeTooltip(): ?string
     {
