@@ -5,18 +5,19 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
+use App\Models\Category;
+use App\Models\Location;
 use Filament\Forms\Form;
 use App\Models\Complaint;
 use Filament\Tables\Table;
+use App\Models\CollegeStudent;
 use Filament\Resources\Resource;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ComplaintResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ComplaintResource\RelationManagers;
-use App\Models\Category;
-use App\Models\CollegeStudent;
-use App\Models\Location;
-use Filament\Forms\Components\FileUpload;
 
 class ComplaintResource extends Resource
 {
@@ -66,12 +67,27 @@ class ComplaintResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('')->state(
+                    static function (HasTable $livewire, $rowLoop): string {
+                        return (string) (
+                            $rowLoop->iteration +
+                            ($livewire->getTableRecordsPerPage() * (
+                                $livewire->getTablePage() - 1
+                            ))
+                        );
+                    }
+                )->label('No')
+                ->alignStart()
+                ->width(1),
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('Nama Mahasiswa'),
                 Tables\Columns\TextColumn::make('location.name')
                 ->label('Lokasi'),
                 Tables\Columns\TextColumn::make('category.name')
                 ->label('Kategori'),
+                Tables\Columns\TextColumn::make('created_at')
+                ->label('Dibuat Pada')
+                ->date(),
                 Tables\Columns\TextColumn::make('logs.name')
                 ->label('Status')
                 ->limit(30)

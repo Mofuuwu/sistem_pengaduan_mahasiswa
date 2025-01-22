@@ -21,8 +21,8 @@ memperbaiki halaman detail apabila status ada gambar dan deskripsi nya
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
 DONE => Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik )
 DONE => Tab Pada Resource User (untuk memisahkan antara user, mahasiswa, dan petugas)
+DONE => Data Laporan (Selesaikan File Blade Detail Laporan Yg Menampilkan Detail Dari Laporan Secara Lengkap)
 
-- Data Laporan (Selesaikan File Blade Detail Laporan Yg Menampilkan Detail Dari Laporan Secara Lengkap)
 - Data Petugas (belum dibuat)
 
 
