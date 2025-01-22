@@ -15,4 +15,8 @@ class StudyProgram extends Model
     {
         return $this->belongsTo(Faculty::class);
     }
+    public function college_students()
+    {
+        return $this->hasMany(CollegeStudent::class);
+    }
 }

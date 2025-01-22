@@ -14,4 +14,12 @@ class CollegeStudent extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+    public function study_program()
+    {
+        return $this->belongsTo(StudyProgram::class);
+    }
 }

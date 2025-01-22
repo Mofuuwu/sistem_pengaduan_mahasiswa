@@ -1,9 +1,7 @@
 <====== TO DO LIST ======>
 
-besok rabu 15/1/2025 
-membuat database seeder dan membuat halaman 
+DONE => membuat database seeder dan membuat halaman 
 DONE => menjadi dinamis serta memulai membuat logika pada form pengaduan 
-
 DONE => membuat logic tampilan untuk halaman web yg dinamis 
 DONE => membuat pagination
 DONE => membuat fitur untuk mendukung aduan orang lain dan diri sendiri
@@ -14,19 +12,32 @@ DONE => melanjutkan fitur cari
 DONE => membuat database seeder dan database Factory
 DONE => menambahkan resource untuk program studi dan fakultas pada data mahasiswa
 DONE=> mencoba login admin di halaman login user dan berhasil login (akan diarahkan kemana) => akan tetap diarahkan ke /admin setelah login berhasil
+DONE => menambahkan required pada resource forms
 
-menambahkan required pada resource forms
 memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
 memperbaiki halaman detail apabila status ada gambar dan deskripsi nya
 
-List Data Resources Admin Yg Kurang :
-- Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik, besok di cek lagi )
-- Tag Pada Resource User (sudah dibuat, untuk memisahkan antara user, mahasiswa, dan petugas)
-- Data Laporan (sudah dibuat tapi sepertinya blm berfungsi dengan benar)
-- penanganan status laporan (belum dibuat)
+
+<====== TO DO LIST DATA RESOURCE ADMIN ======>
+DONE => Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik )
+DONE => Tab Pada Resource User (untuk memisahkan antara user, mahasiswa, dan petugas)
+
+- Data Laporan (Selesaikan File Blade Detail Laporan Yg Menampilkan Detail Dari Laporan Secara Lengkap)
 - Data Petugas (belum dibuat)
 
-opsional
+
+<====== TO DO LIST ALUR ======>
+nanti dibuat kolom karyawan_id pada tabel logs
+admin tidak dapat menambahkan logs
+hanya karyawan yg menambahkan logs
+untuk logs dikirim, isi karyawan_id dengan null
+
+buat tampilan urutan logs untuk user
+buat tampilan untuk info logs menggunakan filament page di admin
+Jika Susah Untuk Menambahkan Menambahkan Logs Belajar Cara Menambahkan Relasi Pada Form DI FIlament
+
+
+<====== TO DO LIST OPSIONAL ======>
 memperbaiki bug responsif di beranda/index
 membuat tampilan pada detail user yg memposting aduan
 membuat logo branding

@@ -15,4 +15,8 @@ class Faculty extends Model
     {
         return $this->hasMany(StudyProgram::class);
     }
+    public function college_students()
+    {
+        return $this->hasMany(CollegeStudent::class);
+    }
 }
