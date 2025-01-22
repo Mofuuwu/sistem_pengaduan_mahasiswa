@@ -30,6 +30,7 @@ class FacultyResource extends Resource
                 Forms\Components\TextInput::make('name')
                 ->label('Nama Fakultas')
                 ->columnSpan(2)
+                ->required()
             ]);
     }
 

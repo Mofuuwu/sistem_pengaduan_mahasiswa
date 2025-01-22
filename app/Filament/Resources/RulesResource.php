@@ -29,6 +29,7 @@ class RulesResource extends Resource
                 Forms\Components\TextInput::make('description')
                 ->label('Deskripsi Kebijakan')
                 ->columnSpan(2)
+                ->required()
             ]);
     }
 

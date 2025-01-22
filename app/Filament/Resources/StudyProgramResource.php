@@ -30,11 +30,13 @@ class StudyProgramResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Nama Fakultas')
-                ->columnSpan(2),
+                ->columnSpan(2)
+                ->required(),
                 Forms\Components\Select::make('faculty_id')
                 ->label('Fakultas')
                 ->options(Faculty::all()->pluck('name', 'id'))
-                ->columnSpan(2),
+                ->columnSpan(2)
+                ->required(),
             ]);
     }
 

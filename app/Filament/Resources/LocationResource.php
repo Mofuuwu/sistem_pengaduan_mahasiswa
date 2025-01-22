@@ -29,7 +29,8 @@ class LocationResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Nama Lokasi')
-                ->columnSpan(2),
+                ->columnSpan(2)
+                ->required(),
             ]);
     }
 

@@ -102,12 +102,13 @@ class CollegeStudentResource extends Resource
                     ->width(1),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Nama'),
-                Tables\Columns\TextColumn::make('total_complaints')
+                Tables\Columns\BadgeColumn::make('total_complaints')
                     ->label('Aduan Dibuat')
                     ->state(static function ($record) {
                         $userId = $record->user_id;
                         return Complaint::where('user_id', $userId)->count();
-                    }),
+                    })
+                    ->color('success'),
             ])
             ->filters([
                 //

@@ -30,6 +30,7 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                 ->label('Nama Kategori')
                 ->columnSpan('2')
+                ->required()
             ]);
     }
 
