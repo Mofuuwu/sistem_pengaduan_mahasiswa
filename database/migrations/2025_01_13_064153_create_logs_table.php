@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('complaint_id');
             $table->text('path_file')->nullable();
             $table->string('file_type')->nullable();
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('phone_number');
             $table->string('address');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

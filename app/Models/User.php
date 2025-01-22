@@ -20,6 +20,9 @@ class User extends Authenticatable
     public function college_student() {
         return $this->hasOne(CollegeStudent::class, 'user_id');
     }
+    public function employee() {
+        return $this->hasOne(Employee::class, 'user_id');
+    }
     protected $hidden = [
         'password',
         'remember_token',

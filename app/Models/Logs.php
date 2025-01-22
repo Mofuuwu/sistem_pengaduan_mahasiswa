@@ -13,4 +13,7 @@ class Logs extends Model
     public function complaint() {
         return $this->belongsTo(Complaint::class, 'complaint_id');
     }
+    public function employee() {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 }
