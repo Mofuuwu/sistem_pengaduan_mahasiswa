@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use Filament\Forms\Components\Placeholder;
 use Filament\Tables;
 use App\Models\Employee;
 use Filament\Forms\Form;
@@ -30,24 +31,58 @@ class EmployeeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                ->options(User::all()->pluck('name', 'id'))
+                ->relationship('user', 'name')
+                ->options(function () {
+                    return User::whereNotIn('role_id', [1, 3]) 
+                    ->whereNotIn('id', function($query) {
+                        $query->select('user_id')->from('employees');
+                    })
+                    ->pluck('name', 'id');  
+                })
                 ->label('Nama')
+                ->placeholder('Pilih User Untuk Role Ini, Jika Tidak Ada Silahkan Buat Terlebih Dahulu')
+                ->searchable()
+                ->preload()
+                ->columnSpan(2)
+                ->createOptionForm([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255)
+                        ->label('Nama'),
+                    Forms\Components\TextInput::make('email')
+                        ->required()
+                        ->maxLength(255)
+                        ->label('Email')
+                        ->email(),
+                    Forms\Components\TextInput::make('password')
+                        ->required()
+                        ->maxLength(255)
+                        ->label('password')
+                        ->password(),
+                    Forms\Components\Hidden::make('role_id')
+                        ->dehydrated()
+                        ->default('2')
+                ])
+                ->required(),
+                Forms\Components\Select::make('email')
+                ->relationship('user', 'email')
                 ->disabled()
-                ->columnSpan(2),
-                Forms\Components\Select::make('user_id')
-                ->options(User::all()->pluck('email', 'id'))
+                ->visibleOn('view')
                 ->label('Email')
-                ->disabled()
                 ->columnSpan(2),
                 Forms\Components\TextInput::make('phone_number')
                 ->label('Nomor Telepon')
-                ->columnSpan(2),
+                ->columnSpan(2)
+                ->required(),
                 Forms\Components\TextArea::make('address')
                 ->label('Alamat')
-                ->columnSpan(2),
-                Forms\Components\DatePicker::make('created_at')
+                ->columnSpan(2)
+                ->required(),
+                Forms\Components\Hidden::make('created_at')
                 ->label('Dibuat Pada')
-                ->columnSpan(2),
+                ->default(now())
+                ->columnSpan(2)
+                ->dehydrated(),
             ]);
     }
 
@@ -99,7 +134,7 @@ class EmployeeResource extends Resource
     {
         return [
             'index' => Pages\ListEmployees::route('/'),
-            // 'create' => Pages\CreateEmployee::route('/create'),
+            'create' => Pages\CreateEmployee::route('/create'),
         ];
     }
     public static function getNavigationBadge(): ?string

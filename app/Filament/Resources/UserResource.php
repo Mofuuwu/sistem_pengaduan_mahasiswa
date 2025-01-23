@@ -55,10 +55,12 @@ class UserResource extends Resource
                 ->columnSpan(2),
                 Forms\Components\DatePicker::make('created_at')
                 ->label('Dibuat Pada')
-                ->disabled(),
+                ->disabled()
+                ->hiddenOn('create'),
                 Forms\Components\DatePicker::make('updated_at')
                 ->label('Diubah Pada')
                 ->disabled()
+                ->hiddenOn('create'),
             ]);
     }
 
