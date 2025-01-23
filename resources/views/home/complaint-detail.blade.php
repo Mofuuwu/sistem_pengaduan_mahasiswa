@@ -1,4 +1,3 @@
-
 @extends('layouts/start_html')
 
 @include('layouts/components/navbar')
@@ -48,19 +47,19 @@
             <hr class="border-[1px] border-customgray2">
             <div class="flex-2 p-5">
                 <div class="grid grid-cols-3 gap-4 mb-5">
-                @foreach ($complaint->attachments as $attachment)
+                    @foreach ($complaint->attachments as $attachment)
                     @if ($attachment->file_type == 'pdf')
-                        <div class="w-24 h-auto bg-gray-200 rounded-lg overflow-hidden">
-                            <!-- <embed src="{{ $attachment->path_file }}" type="application/pdf" class="w-full h-full" /> -->
-                             <div class="flex flex-col justify-center items-center overflow-hidden">
-                                <img src="https://cdn-icons-png.freepik.com/256/16425/16425681.png?semt=ais_hybrid" alt="">
-                                <a href="{{ route('attachments.download', $attachment->id) }}" class="bg-blue-400 p-1 font-inter font-semibold text-white rounded-lg px-3 py-1">Download</a>
-                             </div>
+                    <div class="w-24 h-auto bg-gray-200 rounded-lg overflow-hidden">
+                        <!-- <embed src="{{ $attachment->path_file }}" type="application/pdf" class="w-full h-full" /> -->
+                        <div class="flex flex-col justify-center items-center overflow-hidden">
+                            <img src="https://cdn-icons-png.freepik.com/256/16425/16425681.png?semt=ais_hybrid" alt="">
+                            <a href="{{ route('attachments.download', $attachment->id) }}" class="bg-blue-400 p-1 font-inter font-semibold text-white rounded-lg px-3 py-1">Download</a>
                         </div>
+                    </div>
                     @else
-                        <img src="{{ $attachment->path_file }}" alt="Image" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
+                    <img src="{{ $attachment->path_file }}" alt="Image" class="bg-red-500 w-full h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onclick="showImageModal(this)">
                     @endif
-                @endforeach
+                    @endforeach
                 </div>
                 <div class="bg-customgray2 p-4 rounded-lg shadow">
                     <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</p>
@@ -107,23 +106,72 @@
                 <h3 class="text-lg font-semibold mb-3 text-customblue">Progress Aduan</h3>
                 <div class="text-sm flex flex-col gap-2">
                     @foreach($complaint->logs as $log)
-                    <div class="flex flex-col justify-between border-b p-2 bg-purple-500 rounded-lg">
-                        <span class="text-white font-bold">{{ $log->name }}</span>
-                        <span class="text-white opacity-90">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</span>
+                    @php
+                    $bgColor = '';
+                    $textColor = 'text-black'; 
+
+                    switch ($log->name) {
+                    case 'dikirim':
+                    $bgColor = 'bg-blue-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'diterima':
+                    $bgColor = 'bg-green-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'ditinjau':
+                    $bgColor = 'bg-yellow-500';
+                    $textColor = 'text-black';
+                    break;
+                    case 'diproses':
+                    $bgColor = 'bg-orange-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'selesai':
+                    $bgColor = 'bg-teal-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'ditolak':
+                    $bgColor = 'bg-red-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'dibatalkan':
+                    $bgColor = 'bg-gray-500';
+                    $textColor = 'text-white';
+                    break;
+                    case 'ditangguhkan':
+                    $bgColor = 'bg-purple-500';
+                    $textColor = 'text-white';
+                    break;
+                    default:
+                    $bgColor = 'bg-white';
+                    $textColor = 'text-black';
+                    break;
+                    }
+                    @endphp
+
+                    <div class="px-3 py-1 rounded-md flex justify-between items-center {{$bgColor}}">
+                        <div class="">
+                            <div class="flex gap-2">
+                                <p class="font-semibold {{$textColor}}">{{ ucfirst($log->name) }}</p>
+                                @if ($log->employee_id)
+                                <p class="{{$textColor}}">-</p>
+                                <p class="font-semibold {{$textColor}}">{{$log->employee->user->name}}</p>
+                                @endif
+                            </div>
+                            <p class="text-sm {{ $textColor }}">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
+                        </div>
+                        @if ($log->path_file)
+                        <div class="">
+                            <img class="w-10 cursor-pointer" onclick="showImageModal(this)" src="{{asset('BrandLogo.jpg')}}" alt="">
+                        </div>
+                        @else
+                        <div class="">
+                            <p class="font-inter text-sm {{ $textColor }}">Tidak ada gambar</p>
+                        </div>
+                        @endif
                     </div>
                     @endforeach
-                    <!-- <div class="flex flex-col justify-between border-b p-2 bg-green-500 rounded-lg">
-                        <span class="text-white font-bold">Verifikasi</span>
-                        <span class="text-white opacity-90">10 Jan 2025</span>
-                    </div>
-                    <div class="flex flex-col justify-between border-b p-2 bg-green-500 rounded-lg">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjKs2nlgy2pTj_wOC19foRMe8KdtQS8_s5Uw&s" alt="Selesai Image"
-                            class="bg-red-500 w-full h-[50px] object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform mb-1"
-                            onclick="showImageModal(this)">
-                        <span class="text-white font-bold">Selesai</span>
-                        <span class="text-white opacity-90">10 Jan 2025</span>
-                    </div> -->
-
                 </div>
             </div>
         </div>
