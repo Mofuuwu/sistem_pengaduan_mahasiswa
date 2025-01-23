@@ -22,10 +22,9 @@ class AuthController extends Controller
     ]);
 
     if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
-        $user = Auth::user(); 
-        if ($user->role_id == 1) {
+        if (Auth::user()->role_id == 1) {
             return redirect('admin');
-        } elseif ($user->role_id == 2) {
+        } else if (Auth::user()->role_id == 2) {
             return redirect('employee');
         } else {
             return redirect('/')->with('error', 'Anda tidak memiliki akses ke sistem');

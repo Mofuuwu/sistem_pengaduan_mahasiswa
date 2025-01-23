@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminHandler;
+use App\Http\Middleware\EmployeeHandler;
 use App\Http\Middleware\UserHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'adminHandler' => AdminHandler::class,
+            'employeeHandler' => EmployeeHandler::class,
             'userHandler' => UserHandler::class
         ]);
         $middleware->append([

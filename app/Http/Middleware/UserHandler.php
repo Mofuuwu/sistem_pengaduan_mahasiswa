@@ -16,11 +16,12 @@ class UserHandler
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            return redirect('/employee');
+        }
         if(Auth::check() && Auth::user()->role_id == 1) {
             return redirect('/admin');
-        } else if (Auth::check() && Auth::user()->role_id == 2) {
-            return redirect('/petugas');
-        }
+        } 
         
         return $next($request);
     }
