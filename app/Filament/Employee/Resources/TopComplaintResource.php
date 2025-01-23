@@ -24,6 +24,7 @@ class TopComplaintResource extends Resource
     protected static ?string $modelLabel = 'Aduan Teratas';
     protected static ?string $navigationLabel = 'Aduan Teratas';
     protected static ?string $navigationGroup = 'Aduan';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -72,12 +73,9 @@ class TopComplaintResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ])
             ->modifyQueryUsing(function (Builder $query) {
                 $query->select('complaints.*', DB::raw('COUNT(supports.id) as support_count'))
@@ -102,5 +100,17 @@ class TopComplaintResource extends Resource
             // 'create' => Pages\CreateTopComplaint::route('/create'),
             // 'edit' => Pages\EditTopComplaint::route('/{record}/edit'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Aduan Teratas';
     }
 }

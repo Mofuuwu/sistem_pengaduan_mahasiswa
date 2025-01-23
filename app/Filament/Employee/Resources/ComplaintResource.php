@@ -23,6 +23,7 @@ class ComplaintResource extends Resource
     protected static ?string $navigationLabel = 'Semua Aduan';
     protected static ?string $navigationGroup = 'Aduan';
     protected static ?string $modelLabel = 'Semua Aduan';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -138,5 +139,17 @@ class ComplaintResource extends Resource
             // 'create' => Pages\CreateComplaint::route('/create'),
             // 'edit' => Pages\EditComplaint::route('/{record}/edit'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary';
+    }
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Total Semua Aduan';
     }
 }
