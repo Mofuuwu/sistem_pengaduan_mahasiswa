@@ -10,13 +10,14 @@ DONE => membuat tampilan detail jika format yg dikirim adalah pdf dan download
 DONE => melanjutkan fitur cari
 DONE => membuat database seeder dan database Factory
 DONE => menambahkan resource untuk program studi dan fakultas pada data mahasiswa
-DONE=> mencoba login admin di halaman login user dan berhasil login (akan diarahkan kemana) => akan tetap diarahkan ke /admin setelah login berhasil
+DONE => mencoba login admin di halaman login user dan berhasil login (akan diarahkan kemana) DONE => akan tetap diarahkan ke /admin setelah login berhasil
 DONE => menambahkan required pada resource forms
+DONE => memperbaiki halaman detail apabila logs ada gambar dan deskripsi nya, serta
+     mengganti warna untuk tiap logs
 <==========================>
 
 
 memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
-memperbaiki halaman detail apabila status ada gambar dan deskripsi nya
 
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
@@ -26,9 +27,10 @@ DONE => Data Laporan (Selesaikan File Blade Detail Laporan Yg Menampilkan Detail
     Laporan Secara Lengkap)
 DONE => Data Petugas => ketika membuat data petugas tambahkan juga data user
     dengan relasi sama seperti dulu mencoba filament
+DONE => Membuat Halaman Admin Dan Logika Untuk Karyawan
 <============================================>
 
-- Membuat Halaman Admin Dan Logika Untuk Karyawan
+- fitur download pdf pada halaman admin
 - Data Aduan Yg Sudah Selesai
 - Data Aduan Yg Belum Selesai
 
@@ -37,6 +39,10 @@ DONE => Data Petugas => ketika membuat data petugas tambahkan juga data user
 DONE => nanti dibuat kolom karyawan_id pada tabel logs
 DONE => admin tidak dapat menambahkan logs
 <=============================>
+
+kayanya untuk tampilan edit besok bikin menggunakan blade sendiri, kemudian buat fitur didalamnya untuk dapat menambahkan logs
+
+atau mungkin membuat resource untuk mengelola logs sendiri, jadi nanti employee tinggal menambahkan log baru
 
 hanya karyawan yg menambahkan logs
 untuk logs dikirim, isi karyawan_id dengan null

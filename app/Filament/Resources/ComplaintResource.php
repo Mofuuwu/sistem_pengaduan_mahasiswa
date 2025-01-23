@@ -34,32 +34,6 @@ class ComplaintResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                ->options(User::pluck('name', 'id'))
-                ->disabled()
-                ->label('Nama')
-                ->columnSpan(2),
-                Forms\Components\Select::make('user_id')
-                ->relationship('college_student', 'nim')
-                ->disabled()
-                ->label('Nama')
-                ->columnSpan(2),
-                Forms\Components\Select::make('location_id')
-                ->options(Location::pluck('name', 'id'))
-                ->disabled()
-                ->label('Lokasi'),
-                Forms\Components\Select::make('category_id')
-                ->options(Category::pluck('name', 'id'))
-                ->disabled()
-                ->label('Kategori'),
-                Forms\Components\TextArea::make('description')
-                ->disabled()
-                ->label('Isi Aduan')
-                ->columnSpan(2),
-                Forms\Components\DateTimePicker::make('created_at')
-                ->disabled()
-                ->label('Dibuat Pada')
-                ->columnSpan(2),
             ]);
     }
 
