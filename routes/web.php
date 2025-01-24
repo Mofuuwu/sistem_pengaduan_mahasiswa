@@ -36,7 +36,7 @@ Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del
 Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('search', [HelperController::class, 'search_complaint_by_id'])->name('search_complaint_by_id');
 //--------- HELPER --------------------
-Route::get('/attachments/{id}/download', [HelperController::class, 'downloadAttachment'])->name('attachments.download')->middleware('userHandler');
+Route::get('/attachments/{id}/download', [HelperController::class, 'downloadAttachment'])->name('attachments.download');
 //--------- ANOTHER --------------------
 Route::get('/aduan-berhasil', function () {
     return view('home.complaint-success');
