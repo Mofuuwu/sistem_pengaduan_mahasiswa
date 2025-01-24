@@ -28,11 +28,12 @@ DONE => Data Laporan (Selesaikan File Blade Detail Laporan Yg Menampilkan Detail
 DONE => Data Petugas => ketika membuat data petugas tambahkan juga data user
     dengan relasi sama seperti dulu mencoba filament
 DONE => Membuat Halaman Admin Dan Logika Untuk Karyawan
+DONE => fitur download pdf pada halaman admin
 <============================================>
 
-- fitur download pdf pada halaman admin
 - Data Aduan Yg Sudah Selesai
 - Data Aduan Yg Belum Selesai
+- menambahkan fitur untuk menghapus logs
 
 
 <====== TO DO LIST ALUR ======>

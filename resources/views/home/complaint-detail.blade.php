@@ -154,10 +154,6 @@
                         <div class="">
                             <div class="flex gap-2">
                                 <p class="font-semibold {{$textColor}}">{{ ucfirst($log->name) }}</p>
-                                @if ($log->employee_id)
-                                <p class="{{$textColor}}">-</p>
-                                <p class="font-semibold {{$textColor}}">{{$log->employee->user->name}}</p>
-                                @endif
                             </div>
                             <p class="text-sm {{ $textColor }}">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
                         </div>

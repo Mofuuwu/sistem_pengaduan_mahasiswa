@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ComplaintController;
-use App\Http\Controllers\HelperController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HelperController;
+use App\Http\Controllers\ComplaintController;
 
 //---------- HOME -------------------
 Route::get('/', [HomeController::class, 'index'])->middleware('userHandler');
@@ -41,3 +42,6 @@ Route::get('/attachments/{id}/download', [HelperController::class, 'downloadAtta
 Route::get('/aduan-berhasil', function () {
     return view('home.complaint-success');
 });
+
+
+Route::post('employee/complaints/add_logs', [AdminController::class, 'add_logs'])->name('employee_add_logs')->middleware('employeeHandler');

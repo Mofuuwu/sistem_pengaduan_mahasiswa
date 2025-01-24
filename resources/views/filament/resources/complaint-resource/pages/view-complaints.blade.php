@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     @vite('resources/css/app.css')
-    <section class="w-full min-h-screen px-[1%] font-inter">
+    <section class="w-full px-[1%] font-inter">
         <div class="bg-gray-600 bg-opacity-30 min-w-full h-fit rounded-[16px] md:p-10 p-4">
             <div class="grid grid-cols-3 gap-4 mb-5">
                 @foreach ($complaint->attachments as $attachment)
@@ -33,11 +33,11 @@
                 <div class="mt-4 font-inter flex flex-col gap-1 bg-slate-900 p-2 md:p-5 rounded-md">
                     <div class="flex justify-between items-center md:mb-2">
                         <p class="font-bold">Riwayat Aduan</p>
-                        <button class="w-fit mb-1 md:p-2 p-1 bg-blue-500 rounded-full text-md font-bold">
+                        <!-- <button class="w-fit mb-1 md:p-2 p-1 bg-blue-500 rounded-full text-md font-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
-                        </button>
+                        </button> -->
                     </div>
                     @foreach($complaint->logs as $log)
                     @php
@@ -143,9 +143,52 @@
             </div>
         </div>
     </section>
+    @if (Auth::user()->role_id == 2)
+    <section class="w-full px-[1%] font-inter">
+        <form action="{{route('employee_add_logs')}}" method="post" class="bg-gray-600 bg-opacity-30 min-w-full h-fit rounded-[16px] md:p-10 p-4">
+            <p class="text-center font-bold">Tambah Status</p>
+            <div class="flex flex-col gap-2">
+                <label for="">Status</label>
+                <x-filament::input.wrapper>
+                    <x-filament::input.select>
+                        <option value="" disabled>Silahkan Pilih Status</option>
+                        <option value="">Diterima</option>
+                        <option value="">Ditinjau</option>
+                        <option value="">Diproses</option>
+                        <option value="">Selesai</option>
+                        <option value="">Ditolak</option>
+                        <option value="">Dibatalkan</option>
+                        <option value="">Ditangguhkan</option>
+                    </x-filament::input.select>
+                </x-filament::input.wrapper>
+            </div>
+            <div class="flex flex-col gap-2 mt-2">
+                <label for="">Deskripsi <span class="text-gray-400">(Opsional)</span></label>
+                <x-filament::input.wrapper>
+                    <x-filament::input
+                        type="text"
+                    />
+                </x-filament::input.wrapper>
+            </div>
+            <div class="flex flex-col gap-2 mt-2">
+                <label for="">Lampiran <span class="text-gray-400">(Opsional)</span></label>
+                <x-filament::input.wrapper>
+                    <x-filament::input
+                        type="file"
+                    />
+                </x-filament::input.wrapper>
+            </div>
+            <input type="hidden" name="employee_id" value="{{Auth::user()->employee->id}}">
+            <x-filament::button type="submit" class="w-full mt-2">
+                Tambah Status Baru
+            </x-filament::button>
+        </form>
+    </section>
+    @endif
 
     <div onclick="closeProfileModal()" id="profile_overlay" class="fixed inset-0 hidden w-full h-screen flex justify-center items-center font-inter bg-black bg-opacity-70">
         <div id="profile_modal" class="md:w-[50%] w-90% bg-gray-800 p-[3%] rounded-xl">
+            <p class="text-center font-bold mb-4">Detail Pengirim</p>
             <div class="flex gap-2 flex-wrap">
                 <p class="font-bold">Nama : </p>
                 <p>{{$complaint->user->name}}</p>
@@ -172,6 +215,7 @@
             </div>
         </div>
     </div>
+
     <div class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center" id="modal-overlay" onclick="closeImageModal()">
         <div class="p-4 rounded-lg shadow">
             <img src="" alt="Modal Image" id="modal-image" class="max-w-full max-h-screen">
@@ -183,6 +227,7 @@
             <img src="" alt="Modal Image" id="modal-image2" class="max-w-full max-h-screen">
         </div>
     </div>
+
     <script>
         function showImageModal(image) {
             const modalImage = document.getElementById('modal-image');
