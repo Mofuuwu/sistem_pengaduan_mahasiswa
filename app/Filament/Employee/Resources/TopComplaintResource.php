@@ -59,15 +59,18 @@ class TopComplaintResource extends Resource
             // Tables\Columns\TextColumn::make('created_at') 
             //     ->label('Dibuat Pada')
             //     ->date(),
-            Tables\Columns\TextColumn::make('support_count')
-                ->label('Dukungan'),
-                Tables\Columns\TextColumn::make('logs.name')
+            Tables\Columns\BadgeColumn::make('support_count')
+            ->label('Dukungan')
+            ->color('warning'),
+
+            Tables\Columns\BadgeColumn::make('logs.name')
             ->label('Status')
             ->limit(30)
             ->getStateUsing(function ($record) {
                 $latestLog = $record->logs()->latest()->first();
                 return $latestLog ? $latestLog->name : 'Tidak Ada Logs Terbaru';
-            }),
+            })
+            ->color('primary'),
         ])
             ->filters([
                 //

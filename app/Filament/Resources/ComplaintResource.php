@@ -61,14 +61,16 @@ class ComplaintResource extends Resource
                 ->label('Kategori'),
                 Tables\Columns\TextColumn::make('created_at')
                 ->label('Dibuat Pada')
-                ->date(),
-                Tables\Columns\TextColumn::make('logs.name')
+                ->date()
+                ->color('success'),
+                Tables\Columns\BadgeColumn::make('logs.name')
                 ->label('Status')
                 ->limit(30)
                 ->getStateUsing(function ($record) {
                     $latestLog = $record->logs()->latest()->first();
                     return $latestLog ? $latestLog->name : 'Tidak Ada Logs Terbaru';
-                }),
+                })
+                ->color('primary'),
             ])
             ->filters([
                 //
