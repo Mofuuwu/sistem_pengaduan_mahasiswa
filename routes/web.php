@@ -45,3 +45,4 @@ Route::get('/aduan-berhasil', function () {
 
 
 Route::post('employee/complaints/add_logs', [AdminController::class, 'add_logs'])->name('employee_add_logs')->middleware('employeeHandler');
+Route::post('employee/complaints/del-log/{id}', [AdminController::class, 'del_logs'])->name('employee_del_logs')->middleware('employeeHandler');

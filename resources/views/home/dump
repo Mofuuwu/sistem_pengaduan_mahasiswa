@@ -17,7 +17,12 @@ DONE => memperbaiki halaman detail apabila logs ada gambar dan deskripsi nya, se
 <==========================>
 
 
-memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
+- memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
+- menambahkan resource logs pada employee dan admin untuk mengetahui log terbaru yg ditambahkan
+- menambahkan resource aduan yg logs nya sesuai dengan id employee saat ini dengan label resource ( sedang dikerjakan )
+- membuat tabs pada halaman semua aduan berdasarkan status logs
+- Data Aduan Yg Sudah Selesai
+- Data Aduan Yg Belum Selesai
 
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
@@ -29,24 +34,20 @@ DONE => Data Petugas => ketika membuat data petugas tambahkan juga data user
     dengan relasi sama seperti dulu mencoba filament
 DONE => Membuat Halaman Admin Dan Logika Untuk Karyawan
 DONE => fitur download pdf pada halaman admin
+DONE => menambahkan fitur untuk menghapus logs
 <============================================>
 
-- Data Aduan Yg Sudah Selesai
-- Data Aduan Yg Belum Selesai
-- menambahkan fitur untuk menghapus logs
+- menghapus fitur white mode pada admin
 
 
 <====== TO DO LIST ALUR ======>
 DONE => nanti dibuat kolom karyawan_id pada tabel logs
 DONE => admin tidak dapat menambahkan logs
+DONE => kayanya untuk tampilan edit besok bikin menggunakan blade sendiri, kemudian buat 
+    fitur didalamnya untuk dapat menambahkan logs
+DONE => hanya karyawan yg menambahkan logs
+DONE => untuk logs dikirim, isi karyawan_id dengan null
 <=============================>
-
-kayanya untuk tampilan edit besok bikin menggunakan blade sendiri, kemudian buat fitur didalamnya untuk dapat menambahkan logs
-
-atau mungkin membuat resource untuk mengelola logs sendiri, jadi nanti employee tinggal menambahkan log baru
-
-hanya karyawan yg menambahkan logs
-untuk logs dikirim, isi karyawan_id dengan null
 
 buat tampilan urutan logs untuk user
 buat tampilan untuk info logs menggunakan filament page di admin

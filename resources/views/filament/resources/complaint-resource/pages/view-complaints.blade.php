@@ -1,5 +1,10 @@
 <x-filament-panels::page>
     @vite('resources/css/app.css')
+    @if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+    @endif
     <section class="w-full px-[1%] font-inter">
         <div class="bg-gray-600 bg-opacity-30 min-w-full h-fit rounded-[16px] md:p-10 p-4">
             <div class="grid grid-cols-3 gap-4 mb-5">
@@ -33,105 +38,118 @@
                 <div class="mt-4 font-inter flex flex-col gap-1 bg-slate-900 p-2 md:p-5 rounded-md">
                     <div class="flex justify-between items-center md:mb-2">
                         <p class="font-bold">Riwayat Aduan</p>
-                        <!-- <button class="w-fit mb-1 md:p-2 p-1 bg-blue-500 rounded-full text-md font-bold">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        <button id="toggle-btn" class="w-fit mb-1 md:p-2 p-1 bg-blue-500 rounded-full text-md font-bold">
+                            <svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                             </svg>
-                        </button> -->
+
+                        </button>
                     </div>
-                    @foreach($complaint->logs as $log)
-                    @php
-                    $bgColor = '';
-                    $textColor = 'text-black';
+                    <div id="logs-container" class=" flex flex-col gap-1">
+                        @foreach($complaint->logs as $log)
+                        @php
+                        $bgColor = '';
+                        $textColor = 'text-white';
 
-                    switch ($log->name) {
-                    case 'dikirim':
-                    $bgColor = 'bg-blue-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'diterima':
-                    $bgColor = 'bg-green-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'ditinjau':
-                    $bgColor = 'bg-yellow-500';
-                    $textColor = 'text-black';
-                    break;
-                    case 'diproses':
-                    $bgColor = 'bg-orange-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'selesai':
-                    $bgColor = 'bg-teal-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'ditolak':
-                    $bgColor = 'bg-red-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'dibatalkan':
-                    $bgColor = 'bg-gray-500';
-                    $textColor = 'text-white';
-                    break;
-                    case 'ditangguhkan':
-                    $bgColor = 'bg-purple-500';
-                    $textColor = 'text-white';
-                    break;
-                    default:
-                    $bgColor = 'bg-white';
-                    $textColor = 'text-black';
-                    break;
-                    }
-                    @endphp
+                        switch ($log->name) {
+                        case 'dikirim':
+                        $bgColor = 'bg-blue-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'diterima':
+                        $bgColor = 'bg-green-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'ditinjau':
+                        $bgColor = 'bg-yellow-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'diproses':
+                        $bgColor = 'bg-orange-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'selesai':
+                        $bgColor = 'bg-teal-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'ditolak':
+                        $bgColor = 'bg-red-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'dibatalkan':
+                        $bgColor = 'bg-gray-500';
+                        $textColor = 'text-white';
+                        break;
+                        case 'ditangguhkan':
+                        $bgColor = 'bg-purple-500';
+                        $textColor = 'text-white';
+                        break;
+                        default:
+                        $bgColor = 'bg-white';
+                        $textColor = 'text-white';
+                        break;
+                        }
+                        @endphp
 
-                    <div class="md:px-4 md:py-2 px-3 py-2 rounded-md bg-opacity-20 flex justify-between items-center {{$bgColor}}">
-                        <div class="">
-                            <div class="flex flex-col">
-                                <p class="font-semibold {{$textColor}}">{{ ucfirst($log->name) }}</p>
-                                <p onclick="toggleLogsModal({{ $log->id }})" id="log-detail-button-{{ $log->id }}" class="text-sm text-blue-400 cursor-pointer">Detail..</p>
+                        <div class="md:px-4 md:py-2 px-3 py-2 rounded-md bg-opacity-20 flex justify-between items-center {{$bgColor}}">
+                            <div class="">
+                                <div class="flex flex-col">
+                                    <p class="font-semibold {{$textColor}}">{{ ucfirst($log->name) }}</p>
+                                    <p onclick="toggleLogsModal({{ $log->id }})" id="log-detail-button-{{ $log->id }}" class="text-sm text-blue-400 cursor-pointer">Detail..</p>
+                                </div>
                             </div>
+                            @if (Auth::user()->role_id == 2)
+                            <form action="{{ route('employee_del_logs', ['id' => $log->id]) }}" method="post" class="flex items-center gap-2">
+                                @csrf
+                                <p class="text-sm {{ $textColor }}">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
+                                <button type="submit" class="bg-red-500 p-2 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @endif
                         </div>
-                        <p class="text-sm {{ $textColor }}">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
-                    </div>
 
-                    <!-- Modal -->
-                    <div id="logs_modal_{{ $log->id }}" class="w-full bg-gray-800 p-[3%] rounded-xl flex-col flex gap-2 hidden">
-                        <div class="flex justify-between items-center">
-                            <div class="px-3 py-1 rounded-md flex gap-2 flex-wrap w-fit {{$bgColor}}">
-                                <p class="font-semibold">{{ ucfirst($log->name) }}</p>
+                        <!-- Modal -->
+                        <div id="logs_modal_{{ $log->id }}" class="w-full bg-gray-800 p-[3%] rounded-xl flex-col flex gap-2 hidden">
+                            <div class="flex justify-between items-center">
+                                <div class="px-3 py-1 rounded-md flex gap-2 flex-wrap w-fit {{$bgColor}}">
+                                    <p class="font-semibold">{{ ucfirst($log->name) }}</p>
+                                </div>
+                                <p class="text-sm text-gray-400">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
                             </div>
-                            <p class="text-sm text-gray-400">{{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d F Y') }}</p>
-                        </div>
-                        @if ($log->employee_id)
-                        <div class="rounded-md flex gap-2 flex-wrap mt-2">
-                            <p class="text-sm font-semibold">Nama Petugas :</p>
-                            <p class="text-sm">{{$log->employee->user->name}}</p>
-                        </div>
-                        @endif
-                        <div class="rounded-md flex flex-col mt-2">
-                            <p class=" text-sm font-semibold">Deskripsi :</p>
-                            @if ($log->description)
-                            <div class="bg-slate-900 bg-opacity-50 p-2 rounded-md">
-                                <p class="text-sm text-gray-400">{{$log->description}}</p>
+                            @if ($log->employee_id)
+                            <div class="rounded-md flex gap-2 flex-wrap mt-2">
+                                <p class="text-sm font-semibold">Nama Petugas :</p>
+                                <p class="text-sm">{{$log->employee->user->name}}</p>
+                            </div>
+                            @endif
+                            <div class="rounded-md flex flex-col mt-2">
+                                <p class=" text-sm font-semibold">Deskripsi :</p>
+                                @if ($log->description)
+                                <div class="bg-slate-900 bg-opacity-50 p-2 rounded-md">
+                                    <p class="text-sm text-gray-400">{{$log->description}}</p>
+                                </div>
+                                @else
+                                <div class="bg-slate-900 bg-opacity-50 p-2 rounded-md">
+                                    <p class="text-sm text-gray-400">Tidak ada deskripsi</p>
+                                </div>
+                                @endif
+                            </div>
+                            <p class="font-semibold mt-2 text-sm">Lampiran :</p>
+                            @if ($log->path_file)
+                            <div class="w-full h-24 overflow-hidden rounded-md flex justify-center items-center cursor-pointer">
+                                <img onclick="showImageModal2(this)" src="{{Storage::url($log->path_file)}}" alt="">
                             </div>
                             @else
                             <div class="bg-slate-900 bg-opacity-50 p-2 rounded-md">
-                                <p class="text-sm text-gray-400">Tidak ada deskripsi</p>
+                                <p class="text-sm text-gray-400">Tidak ada Lampiran</p>
                             </div>
                             @endif
                         </div>
-                        <p class="font-semibold mt-2 text-sm">Lampiran :</p>
-                        @if ($log->path_file)
-                        <div class="w-full h-24 overflow-hidden rounded-md flex justify-center items-center cursor-pointer">
-                            <img onclick="showImageModal2(this)" src="{{asset('BrandLogo.jpg')}}" alt="">
-                        </div>
-                        @else
-                        <div class="bg-slate-900 bg-opacity-50 p-2 rounded-md">
-                            <p class="text-sm text-gray-400">Tidak ada Lampiran</p>
-                        </div>
-                        @endif
+                        @endforeach
                     </div>
-                    @endforeach
 
 
 
@@ -145,45 +163,52 @@
     </section>
     @if (Auth::user()->role_id == 2)
     <section class="w-full px-[1%] font-inter">
-        <form action="{{route('employee_add_logs')}}" method="post" class="bg-gray-600 bg-opacity-30 min-w-full h-fit rounded-[16px] md:p-10 p-4">
-            <p class="text-center font-bold">Tambah Status</p>
-            <div class="flex flex-col gap-2">
-                <label for="">Status</label>
-                <x-filament::input.wrapper>
-                    <x-filament::input.select>
-                        <option value="" disabled>Silahkan Pilih Status</option>
-                        <option value="">Diterima</option>
-                        <option value="">Ditinjau</option>
-                        <option value="">Diproses</option>
-                        <option value="">Selesai</option>
-                        <option value="">Ditolak</option>
-                        <option value="">Dibatalkan</option>
-                        <option value="">Ditangguhkan</option>
-                    </x-filament::input.select>
-                </x-filament::input.wrapper>
+        <form action="{{route('employee_add_logs')}}" method="post" enctype="multipart/form-data" class="bg-gray-800 bg-opacity-70 min-w-full h-fit rounded-[16px] md:p-10 p-4">
+            @csrf
+            <p class="text-center font-bold text-white">Tambah Status</p>
+            <div class="flex flex-col gap-4">
+                <label for="name" class="text-white">Status</label>
+                <select required id="name" name="name" class="bg-gray-700 text-white px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" selected disabled>Silahkan Pilih Status</option>
+                    <option value="diterima">Diterima</option>
+                    <option value="ditinjau">Ditinjau</option>
+                    <option value="diproses">Diproses</option>
+                    <option value="selesai">Selesai</option>
+                    <option value="ditolak">Ditolak</option>
+                    <option value="dibatalkan">Dibatalkan</option>
+                    <option value="ditangguhkan">Ditangguhkan</option>
+                </select>
             </div>
-            <div class="flex flex-col gap-2 mt-2">
-                <label for="">Deskripsi <span class="text-gray-400">(Opsional)</span></label>
-                <x-filament::input.wrapper>
-                    <x-filament::input
-                        type="text"
-                    />
-                </x-filament::input.wrapper>
+
+            <div class="flex flex-col gap-4 mt-2">
+                <label for="description" class="text-white">Deskripsi <span class="text-gray-400">(Opsional)</span></label>
+                <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    placeholder="Masukkan deskripsi"
+                    class="bg-gray-700 text-white px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </div>
-            <div class="flex flex-col gap-2 mt-2">
-                <label for="">Lampiran <span class="text-gray-400">(Opsional)</span></label>
-                <x-filament::input.wrapper>
-                    <x-filament::input
-                        type="file"
-                    />
-                </x-filament::input.wrapper>
+
+            <div class="flex flex-col gap-4 mt-2">
+                <label for="attachment" class="text-white">Lampiran <span class="text-gray-400">(Opsional)</span></label>
+                <input
+                    type="file"
+                    id="attachment"
+                    name="attachment"
+                    accept=".jpg, .jpeg, .png"
+                    class="bg-gray-700 text-white px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </div>
+
             <input type="hidden" name="employee_id" value="{{Auth::user()->employee->id}}">
-            <x-filament::button type="submit" class="w-full mt-2">
+            <input type="hidden" name="complaint_id" value="{{$complaint->id}}">
+
+            <button type="submit" class="w-full mt-4 bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300">
                 Tambah Status Baru
-            </x-filament::button>
+            </button>
         </form>
     </section>
+
     @endif
 
     <div onclick="closeProfileModal()" id="profile_overlay" class="fixed inset-0 hidden w-full h-screen flex justify-center items-center font-inter bg-black bg-opacity-70">
@@ -325,5 +350,19 @@
                 openButton.textContent = 'Detail..';
             }
         }
+        const toggleBtn = document.getElementById('toggle-btn');
+        const logsContainer = document.getElementById('logs-container');
+        const arrowIcon = document.getElementById('arrow-icon');
+
+        logsContainer.style.display = 'none';
+        toggleBtn.addEventListener('click', () => {
+            if (logsContainer.style.display === 'none') {
+                logsContainer.style.display = 'flex';
+                arrowIcon.classList.add('rotate-180');
+            } else {
+                logsContainer.style.display = 'none';
+                arrowIcon.classList.remove('rotate-180');
+            }
+        });
     </script>
 </x-filament-panels::page>
