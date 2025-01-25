@@ -8,26 +8,28 @@ use Filament\Forms\Form;
 use App\Models\Complaint;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Tables\Contracts\HasTable;
+use App\Models\ComplaintBeingWorked;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Employee\Resources\ComplaintResource\Pages;
-use App\Filament\Employee\Resources\ComplaintResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Employee\Resources\ComplaintBeingWorkedResource\Pages;
+use App\Filament\Employee\Resources\ComplaintBeingWorkedResource\RelationManagers;
+use Filament\Tables\Contracts\HasTable;
 
-class ComplaintResource extends Resource
+class ComplaintBeingWorkedResource extends Resource
 {
     protected static ?string $model = Complaint::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-megaphone';
-    protected static ?string $navigationLabel = 'Semua Aduan';
-    protected static ?string $modelLabel = 'Semua Aduan';
-    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationIcon = 'heroicon-s-briefcase';
+    protected static ?string $navigationLabel = 'Aduan Diambil Alih';
+    protected static ?string $modelLabel = 'Aduan Diambil Alih';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                //
             ]);
     }
 
@@ -48,15 +50,15 @@ class ComplaintResource extends Resource
                     ->alignStart()
                     ->width(1),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Nama Mahasiswa'),
+                ->label('Nama Pengirim'),
                 Tables\Columns\TextColumn::make('location.name')
-                    ->label('Lokasi'),
+                ->label('Lokasi'),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Kategori'),
+                ->label('Kategori'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat Pada')
-                    ->date('d F Y')
-                    ->color('success'),
+                ->date('d F Y')
+                ->color('success')
+                ->label('Dibuat Pada'),
                 Tables\Columns\BadgeColumn::make('logs.name')
                     ->label('Status')
                     ->limit(30)
@@ -70,10 +72,19 @@ class ComplaintResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat Aduan')
+                    ->url(function ($record) {
+                        return '/employee/complaints/detail/' . $record->id;
+                    })
             ])
-            ->bulkActions([]);
+            ->bulkActions([
+            ])
+            ->modifyQueryUsing(function ($query) {
+                return $query->whereHas('logs', function ($logQuery) {
+                    $logQuery->where('employee_id', Auth::user()->employee->id);
+                });
+            });
     }
 
     public static function getRelations(): array
@@ -86,15 +97,14 @@ class ComplaintResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListComplaints::route('/'),
-            'view' => Pages\ViewComplaints::route('detail/{record}'),
-            // 'create' => Pages\CreateComplaint::route('/create'),
-            // 'edit' => Pages\EditComplaint::route('/{record}/edit'),
+            'index' => Pages\ListComplaintBeingWorkeds::route('/'),
         ];
     }
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::whereHas('logs', function ($query) {
+            $query->where('employee_id', Auth::user()->employee->id);
+        })->count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
@@ -102,6 +112,6 @@ class ComplaintResource extends Resource
     }
     public static function getNavigationBadgeTooltip(): ?string
     {
-        return 'Total Semua Aduan';
+        return 'Aduan Diambil Alih';
     }
 }

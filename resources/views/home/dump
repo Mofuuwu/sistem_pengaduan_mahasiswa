@@ -14,15 +14,16 @@ DONE => mencoba login admin di halaman login user dan berhasil login (akan diara
 DONE => menambahkan required pada resource forms
 DONE => memperbaiki halaman detail apabila logs ada gambar dan deskripsi nya, serta
      mengganti warna untuk tiap logs
+DONE => menambahkan resource logs pada employee dan admin untuk mengetahui log terbaru yg 
+    ditambahkan
+DONE => menambahkan resource aduan yg logs nya sesuai dengan id employee saat ini dengan 
+    label resource ( sedang dikerjakan ) -> namanya diganti diambil alih
 <==========================>
 
 
 - memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
-- menambahkan resource logs pada employee dan admin untuk mengetahui log terbaru yg ditambahkan
-- menambahkan resource aduan yg logs nya sesuai dengan id employee saat ini dengan label resource ( sedang dikerjakan )
 - membuat tabs pada halaman semua aduan berdasarkan status logs
-- Data Aduan Yg Sudah Selesai
-- Data Aduan Yg Belum Selesai
+- tab Data Aduan Yg Sudah Selesai di kerjakan dan belum selesai di employee
 
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>

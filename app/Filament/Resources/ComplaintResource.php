@@ -61,7 +61,7 @@ class ComplaintResource extends Resource
                 ->label('Kategori'),
                 Tables\Columns\TextColumn::make('created_at')
                 ->label('Dibuat Pada')
-                ->date()
+                ->date('d F Y')
                 ->color('success'),
                 Tables\Columns\BadgeColumn::make('logs.name')
                 ->label('Status')

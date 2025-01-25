@@ -23,7 +23,7 @@ class TopComplaintResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-fire';
     protected static ?string $modelLabel = 'Aduan Teratas';
     protected static ?string $navigationLabel = 'Aduan Teratas';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

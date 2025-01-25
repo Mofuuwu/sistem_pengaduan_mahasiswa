@@ -20,7 +20,7 @@ class LogsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-clock';
     protected static ?string $modelLabel = 'Logs Aduan';
     protected static ?string $navigationLabel = 'Logs Aduan';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
