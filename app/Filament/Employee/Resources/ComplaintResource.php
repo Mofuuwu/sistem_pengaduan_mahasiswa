@@ -21,7 +21,6 @@ class ComplaintResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-megaphone';
     protected static ?string $navigationLabel = 'Semua Aduan';
-    protected static ?string $navigationGroup = 'Aduan';
     protected static ?string $modelLabel = 'Semua Aduan';
     protected static ?int $navigationSort = 2;
 
