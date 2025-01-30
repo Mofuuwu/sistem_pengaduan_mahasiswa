@@ -18,12 +18,13 @@ DONE => menambahkan resource logs pada employee dan admin untuk mengetahui log t
     ditambahkan
 DONE => menambahkan resource aduan yg logs nya sesuai dengan id employee saat ini dengan 
     label resource ( sedang dikerjakan ) -> namanya diganti diambil alih
+DONE => membuat tabs pada halaman semua aduan berdasarkan status logs
 <==========================>
 
-
-- memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
-- membuat tabs pada halaman semua aduan berdasarkan status logs
 - tab Data Aduan Yg Sudah Selesai di kerjakan dan belum selesai di employee
+- memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
+
+opsional
 - membuat responsif pada halaman dashboard petugas soalnya kan etugas terkadang menggunakan hp
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
