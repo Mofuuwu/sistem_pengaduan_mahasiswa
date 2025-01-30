@@ -24,7 +24,7 @@ DONE => menambahkan resource aduan yg logs nya sesuai dengan id employee saat in
 - memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
 - membuat tabs pada halaman semua aduan berdasarkan status logs
 - tab Data Aduan Yg Sudah Selesai di kerjakan dan belum selesai di employee
-
+- membuat responsif pada halaman dashboard petugas soalnya kan etugas terkadang menggunakan hp
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
 DONE => Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik )
@@ -37,9 +37,6 @@ DONE => Membuat Halaman Admin Dan Logika Untuk Karyawan
 DONE => fitur download pdf pada halaman admin
 DONE => menambahkan fitur untuk menghapus logs
 <============================================>
-
-- menghapus fitur white mode pada admin
-
 
 <====== TO DO LIST ALUR ======>
 DONE => nanti dibuat kolom karyawan_id pada tabel logs
