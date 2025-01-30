@@ -68,6 +68,16 @@
       <input type="date" disabled value="{{$copr->dob}}" class="w-full px-4 py-2 border-2 border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white font-bold font-inter">
     </div>
 
+    <div class="mb-6">
+      <label for="" class="block text-white font-semibold mb-2">Program Studi</label>
+      <input type="text" disabled value="{{$copr->study_program->name}}" class="w-full px-4 py-2 border-2 border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white font-bold font-inter">
+    </div>
+
+    <div class="mb-6">
+      <label for="" class="block text-white font-semibold mb-2">Fakultas</label>
+      <input type="text" disabled value="{{$copr->faculty->name}}" class="w-full px-4 py-2 border-2 border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white font-bold font-inter">
+    </div>
+
     <!-- Informasi Kontak -->
     <!-- <div class="text-white space-y-4">
       <div class="flex items-center space-x-2">

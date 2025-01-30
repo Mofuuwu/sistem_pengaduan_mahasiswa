@@ -42,7 +42,7 @@
                 <div class="">
                     <p class="text-customblue font-bold font-inter">Rincian Aduan : {{$complaint->id}}</p>
                 </div>
-                <p class="bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{ $complaint->logs()->latest()->first()->name ?? 'belum ada logs' }}</p>
+                <p class="bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{ ucfirst($complaint->logs()->latest()->first()->name) ?? 'belum ada logs' }}</p>
             </div>
             <hr class="border-[1px] border-customgray2">
             <div class="flex-2 p-5">

@@ -20,13 +20,11 @@ DONE => menambahkan resource aduan yg logs nya sesuai dengan id employee saat in
     label resource ( sedang dikerjakan ) -> namanya diganti diambil alih
 DONE => membuat tabs pada halaman semua aduan berdasarkan status logs
 DONE => tab Data Aduan Yg Sudah Selesai di kerjakan dan belum selesai di employee
+DONE => memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
+DONE => menambahkan kolom prodi dan fakultas pada edit profil 
 <==========================>
 
-- memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
 - membuat widget pada dashboard
-
-opsional
-- membuat responsif pada halaman dashboard petugas soalnya kan etugas terkadang menggunakan hp
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
 DONE => Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik )
@@ -50,12 +48,10 @@ DONE => untuk logs dikirim, isi karyawan_id dengan null
 <=============================>
 
 <====== TO DO LIST OPSIONAL ======>
-        belum ada yg selesai
+DONE => memperbaiki bug responsif di beranda/index
 <=================================>
-memperbaiki bug responsif di beranda/index
+
 membuat logo branding
 fitur filter
-
 buat tampilan urutan logs untuk user
-buat tampilan untuk info logs menggunakan filament page di admin
-Jika Susah Untuk Menambahkan Menambahkan Logs Belajar Cara Menambahkan Relasi Pada Form DI FIlament
+membuat responsif pada halaman dashboard petugas soalnya kan etugas terkadang menggunakan hp

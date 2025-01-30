@@ -23,13 +23,13 @@
 <section class="my-top">
     <h1 class=" text-3xl font-bold font-inter text-customblue text-center mt-20">Keluh Kampus</h1>
     <div class="flex justify-center items-center">
-        <p class="w-1/2 font-inter font-normal text-center text-customblue opacity-50">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+        <p class="w-1/2 font-inter font-normal text-center text-customblue opacity-50">Keluh Kampus adalah aplikasi pengaduan yang dirancang untuk memudahkan mahasiswa dalam menyampaikan keluhan atau masalah terkait kampus. Dengan fitur yang mudah digunakan, aplikasi ini memungkinkan mahasiswa untuk mengajukan keluhan secara langsung, melacak status pengaduan, dan mendapatkan solusi yang cepat dan responsif dari pihak kampus.</p>
     </div>
 </section>
 
 @include('layouts/components/navbar')
 
-<section class="my-search bg-customgray bg-opacity-40 mt-20 px-4 sm:px-6 md:px-[10%] flex justify-center items-center flex-col">
+<section class="overflow-x-hidden my-search bg-customgray bg-opacity-40 mt-20 px-4 sm:px-6 md:px-[10%] flex justify-center items-center flex-col">
     <form action="{{route('search_complaint_by_id')}}" method="post" class="form-input flex flex-col gap-4 w-full mt-24 my-20">
         @csrf
         <!-- Teks di atas -->
@@ -69,7 +69,7 @@
     </form>
 </section>
 
-<section class="my-top-aduan flex flex-col items-center justify-center pb-12">
+<section class="overflow-x-hidden my-top-aduan flex flex-col items-center justify-center pb-12">
     <h1 class="text-3xl font-bold font-inter text-customblue text-center mt-20">Pengaduan Dengan Dukungan Teratas</h1>
 
     <!-- Grid Section for Cards -->
@@ -203,7 +203,7 @@
     </div>
 </section>
 
-<section class="my-langkah bg-customgray bg-opacity-40 pb-20 pt-8 mt-20 px-[10%] justify-center items-center flex-col lg:block md:block hidden">
+<section class="overflow-x-hidden my-langkah bg-customgray bg-opacity-40 pb-20 pt-8 mt-20 px-[10%] justify-center items-center flex-col lg:block md:block hidden">
     <h1 class="text-3xl font-bold font-inter text-customblue text-center mt-20 mb-8">Langkah Langkah Melakukan Pengaduan</h1>
     <div class="bg-customblue rounded-[20px] w-full mt-4 mb-8 p-[5%] flex flex-wrap justify-around items-center">
         <!-- content 1 -->
@@ -259,7 +259,7 @@
     </div>
 </section>
 
-<section class="my-langkah-sm bg-customgray bg-opacity-40 mt-20 px-[10%] sm:px-[5%] flex justify-center items-center flex-col lg:hidden md:hidden">
+<section class="overflow-x-hidden my-langkah-sm bg-customgray bg-opacity-40 mt-20 px-[10%] sm:px-[5%] flex justify-center items-center flex-col lg:hidden md:hidden">
     <h1 class="text-3xl sm:text-2xl font-bold font-inter text-customblue text-center mt-20 my-4">Langkah Langkah Melakukan Pengaduan</h1>
     <div class="w-full mt-4 mb-8 p-[5%] flex flex-wrap flex-col justify-around items-center ">
         <!-- content 1 -->
