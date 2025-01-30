@@ -60,7 +60,11 @@
         <!-- Teks di bawah input dan button -->
         <p class="text-customblue font-inter mt-4 text-center sm:text-left flex justify-center">
             <span class="font-medium">Ingin melakukan pengaduan?</span>
-            <a href="{{route('user-login')}}" class="font-bold">Login Sekarang</a>
+            @if (!Auth::check())
+                <a href="{{route('user-login')}}" class="font-bold">Login Sekarang</a>
+            @elseif(Auth::check())
+                <a href="/buat-aduan" class="font-bold">Buat Aduan</a>
+            @endif
         </p>
     </form>
 </section>

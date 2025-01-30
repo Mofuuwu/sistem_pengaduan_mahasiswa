@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollegeStudent;
+use App\Models\Faculty;
+use App\Models\StudyProgram;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirecResponse;
@@ -38,7 +40,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('home.auth.register');
+        $study_programs = StudyProgram::all();
+        $faculties = Faculty::all();
+        return view('home.auth.register', ['study_programs' => $study_programs, 'faculties' => $faculties]);
     }
 
     public function login()
@@ -47,6 +51,7 @@ class AuthController extends Controller
     }
     public function doRegister(Request $request)
     {
+        
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -75,6 +80,8 @@ class AuthController extends Controller
             'address' => $validatedData['address'],
             'phone_number' => $validatedData['phone_number'],
             'dob' => $validatedData['dob'],
+            'study_program_id' => $request['study_program'],
+            'faculty_id' => $request['faculty'],
             'user_id' => $user->id,
         ]);
 

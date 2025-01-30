@@ -3,10 +3,9 @@
 @include('layouts/components/navbar')
 
 <h1 class="text-3xl font-bold font-inter text-customblue text-center mt-20">Register</h1>
-
 <section class="mt-8 mb-20 px-[10%]">
     <form action="{{route('user-register')}}" method="post" id="registration-form" class="w-full max-w-md mx-auto bg-customgray p-6 rounded-lg shadow">
-        @csrf    
+        @csrf
         <!-- Step 1 -->
         <div id="step-1" class="form-step">
             <div class="mb-4">
@@ -66,8 +65,33 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="dob" class="block text-customblue font-bold mb-2">Nomor Telepon</label>
+                <label for="dob" class="block text-customblue font-bold mb-2">Tanggal Lahir</label>
                 <input type="date" required id="dob" name="dob" value="{{ old('dob') }}" class="w-full p-3 rounded bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-customblue">
+                @error('dob')
+                <div class="text-red-500 text-sm font-inter font-bold mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="dob" class="block text-customblue font-bold mb-2">Program Studi</label>
+                <select required id="study_program" name="study_program" value="{{ old('study_program') }}" class="w-full p-3 rounded bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-customblue">
+                    <option value="" disabled selected >Silahkan Pilih Program Studi</option>
+                    @foreach ($study_programs as $s)
+                        <option value="{{ $s->id }}" {{ old('study_program') == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
+                    @endforeach
+
+                </select>
+                @error('dob')
+                <div class="text-red-500 text-sm font-inter font-bold mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="dob" class="block text-customblue font-bold mb-2">Fakultas</label>
+                <select required id="faculty" name="faculty" value="{{ old('faculty') }}" class="w-full p-3 rounded bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-customblue">
+                    <option value="" disabled selected >Silahkan Pilih Fakultas</option>
+                    @foreach ($faculties as $f)
+                        <option value="{{ $f->id }}" {{ old('faculty') == $f->id ? 'selected' : '' }}>{{ $f->name }}</option>
+                    @endforeach
+                </select>
                 @error('dob')
                 <div class="text-red-500 text-sm font-inter font-bold mt-1">{{ $message }}</div>
                 @enderror
