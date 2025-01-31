@@ -10,9 +10,9 @@ use App\Models\User;
 class UserStatsOverview extends BaseWidget
 {
     protected static bool $isLazy = false;
-    protected ?string $heading = 'Analytics';
+    protected ?string $heading = 'Analisa User';
  
-    protected ?string $description = 'An overview of some analytics.';
+    protected ?string $description = 'Analisa User';
     protected function getStats(): array
     {
         return [

@@ -31,9 +31,11 @@ Route::get('aduan-didukung/{id}', [ComplaintController::class, 'detail'])->middl
 Route::get('detail/{id}', [ComplaintController::class, 'detail'])->name('complaint_detail')->middleware('userHandler');
 Route::post('jelajahi-aduan/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
+Route::post('aduan-didukung/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('detail/{complaint}/add-support', [ComplaintController::class, 'add_support'])->middleware('auth');
 Route::post('jelajahi-aduan/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('aduanku/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
+Route::post('aduan-didukung/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('detail/{complaint}/del-support', [ComplaintController::class, 'del_support'])->middleware('auth');
 Route::post('search', [HelperController::class, 'search_complaint_by_id'])->name('search_complaint_by_id');
 //--------- HELPER --------------------

@@ -42,7 +42,8 @@
                 <div class="">
                     <p class="text-customblue font-bold font-inter">Rincian Aduan : {{$complaint->id}}</p>
                 </div>
-                <p class="bg-green-400 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{ ucfirst($complaint->logs()->latest()->first()->name) ?? 'belum ada logs' }}</p>
+                <p class="bg-green-500 w-fit h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</p>
+                
             </div>
             <hr class="border-[1px] border-customgray2">
             <div class="flex-2 p-5">
@@ -61,8 +62,11 @@
                     @endif
                     @endforeach
                 </div>
-                <div class="bg-customgray2 p-4 rounded-lg shadow">
-                    <p class="text-customblue opacity-70 font-inter font-medium">{{$complaint->location_id}} - {{ \Carbon\Carbon::parse($complaint->created_at)->translatedFormat('d F Y') }}</p>
+                <div class="flex gap-2">
+                    <p class="bg-red-500 w-fit mb-2 h-fit text-white font-bold font-inter px-2 py-1 rounded-md">{{$complaint->location->name}}</p>
+                    <p class="bg-blue-500 w-fit mb-2 h-fit text-white font-bold font-inter px-2 py-1 rounded-md">#{{ $complaint->category->name }}</p>
+                </div>
+                <div class="bg-customgray2 p-4 rounded-lg shadow ">
                     <p class="font-inter text-customblue">{{$complaint->description}}</p>
                 </div>
             </div>
