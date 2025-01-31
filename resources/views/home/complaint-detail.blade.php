@@ -121,7 +121,7 @@
                     break;
                     case 'ditinjau':
                     $bgColor = 'bg-yellow-500';
-                    $textColor = 'text-black';
+                    $textColor = 'text-white';
                     break;
                     case 'diproses':
                     $bgColor = 'bg-orange-500';
