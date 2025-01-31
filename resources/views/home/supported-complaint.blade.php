@@ -7,11 +7,11 @@
 <section class="top-content w-full mt-20 relative flex flex-col justify-center items-center">
     <!-- Tombol Filter -->
     <div class="w-full flex justify-center gap-2">
-        <button id="btn-filters" onclick="toggleFilter()" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
+        <!-- <button id="btn-filters" onclick="toggleFilter()" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
-        </button>
+        </button> -->
         <a href="aduanku" id="btn-my-complaint" onclick="showMyComplaint()" class="transition-colors duration-300 ease-in-out  py-2 px-5 rounded-[12px] flex justify-center items-center bg-customgray text-customblue">
             <p class="font-inter font-bold">Aduan Saya</p>
         </a>

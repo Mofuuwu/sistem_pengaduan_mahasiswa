@@ -6,11 +6,16 @@
     <!-- Tombol Filter -->
     <form action="{{route('jelajahi-aduan')}}" method="get" class="w-full flex justify-center gap-2">
         @csrf
-        <button id="btn-filters" onclick="toggleFilter()" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
+        <!-- <button id="btn-filters" onclick="toggleFilter()" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
-        </button>
+        </button> -->
+        <a href="/jelajahi-aduan" class="transition-colors duration-300 ease-in-out text-customblue bg-customgray p-2 rounded-[12px]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+        </a>
         <input name="keyword" type="text" placeholder="Cari Kata Kunci" class="bg-customgray 3/4 md:w-1/3 rounded-[12px] px-5 focus:border-none focus:outline-none">
         <button type="submit" id="" class="transition-colors duration-300 ease-in-out text-white bg-customblue py-2 px-5 rounded-[12px] flex justify-center items-center">
             <p class="font-inter font-bold">Cari</p>

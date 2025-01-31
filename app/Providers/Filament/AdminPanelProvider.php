@@ -2,6 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\UserResource\Widgets\BlogPostsChart;
+use App\Filament\Resources\UserResource\Widgets\ComplaintStats;
+use App\Filament\Resources\UserResource\Widgets\ComplaintStatsOverview;
+use App\Filament\Resources\UserResource\Widgets\ComplaintStatsOverviewByCategory;
+use App\Filament\Resources\UserResource\Widgets\ComplaintStatsOverviewByLocation;
+use App\Filament\Resources\UserResource\Widgets\UserStatsOverview;
 use App\Http\Middleware\AdminHandler;
 use App\Http\Middleware\RoleRedirect;
 use Filament\Http\Middleware\Authenticate;
@@ -43,7 +49,11 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                UserStatsOverview::class,
+                ComplaintStats::class,
+                ComplaintStatsOverview::class,
+                ComplaintStatsOverviewByCategory::class,
+                ComplaintStatsOverviewByLocation::class
             ])
             //AGAR NAVBAR GRUP NYA TIDAK COLLAPSE
             // ->navigationGroups([
