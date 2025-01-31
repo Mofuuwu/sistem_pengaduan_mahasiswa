@@ -22,9 +22,8 @@ DONE => membuat tabs pada halaman semua aduan berdasarkan status logs
 DONE => tab Data Aduan Yg Sudah Selesai di kerjakan dan belum selesai di employee
 DONE => memperbaiki halaman registrasi dengan menambahkan prodi dan fakultas
 DONE => menambahkan kolom prodi dan fakultas pada edit profil 
+DONE => membuat widget pada dashboard
 <==========================>
-
-- membuat widget pada dashboard
 
 <====== TO DO LIST DATA RESOURCE ADMIN ======>
 DONE => Data Mahasiswa ( sudah dan sepertinya sudah berfungsi dengan baik )
@@ -54,4 +53,4 @@ DONE => memperbaiki bug responsif di beranda/index
 membuat logo branding
 fitur filter
 buat tampilan urutan logs untuk user
-membuat responsif pada halaman dashboard petugas soalnya kan etugas terkadang menggunakan hp
+membuat responsif pada halaman dashboard petugas soalnya kan petugas terkadang menggunakan hp
